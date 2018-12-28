@@ -13,6 +13,6 @@
 .svn/format
 .svn/entries
 .filelist.txt
-*.db
+.svn/*.db
 .idea/workspace.xml
 .idea*
