@@ -6,7 +6,8 @@
 <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>		
 <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">		
 <title>frame</title>		
-<link rel="stylesheet" type="text/css" href="../css/api.css" />		
+<link rel="stylesheet" type="text/css" href="../css/api.css" />
+  <script  type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
 <style>		
 html,body {min-height: 100%;background-color: #f3f3f3;height: 100%;}		
 .fr {float: right;}		
@@ -87,7 +88,7 @@ html,body {min-height: 100%;background-color: #f3f3f3;height: 100%;}
 <body>		
 <div class="searchbar">		
 	<div class="guncotton">		
-		<input type="text" placeholder="搜索手机号/昵称">		
+       <input id="num" type="text" placeholder="搜索手机号/昵称">
 	</div>		
 </div>		
 		
@@ -128,8 +129,37 @@ html,body {min-height: 100%;background-color: #f3f3f3;height: 100%;}
 		
 </body>		
 <script type="text/javascript" src="../script/api.js"></script>		
-<script type="text/javascript">		
-apiready = function  () {}		
+<script type="text/javascript">
+
+  $(function(){
+    users = $api.getStorage("users");
+    $('#num').bind('input propertychange', function() {
+      var username = $(this).val();
+      api.ajax({
+        url:'http://192.168.1.109:2356/index/phone/request',
+        method:'post',
+        data:{
+          values: {
+            "ac" :"findUser",
+            "username":username,
+            "uid":users.id
+          },
+        }
+      },function(ret,err){
+         console.log(JSON.stringify(ret))
+        if (ret.code == 200){
+          api.toast({
+            msg: '搜索用户成功！!',
+            duration: 3000,
+            location: 'bottom'
+          });
+        }
+
+      });
+
+    })
+  })
+apiready = function  () {}
 function openNew3() {
         api.openWin({
             name: 'xiangxi',
