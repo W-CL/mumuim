@@ -1,0 +1,330 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title>APICloud APP</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style>
+            html,
+            body {
+                background-color: #F4F4F4;
+            }
+			.h80 {height: 80px;}		
+		.h40 {height: 40px;}		
+		.h20 {height: 20px;}		
+    	.h10 {height: 10px;background: #e5e5e5;}		
+		.h1 {height: 1px;margin-left: 0px;background: #e5e5e5;}		
+		.fr {float: right;}		
+		.fl {float: left;}		
+		.hightitem {background-color: #fff;}	
+            
+            .empty>img {
+                float: left;
+                padding-left: 20px;
+                height: 124px;
+            }
+            
+            .empty>span {
+                height: 124px;
+                line-height: 124px;
+                padding-left: 20px;
+            }
+            
+            .message {
+                display: none;
+                margin-top: 8px;
+                background-color: #fff;
+            }
+            
+            .message>div {
+                position: relative;
+                top: -1px;
+                box-sizing: border-box;
+                height: 49px;
+                border-top: 1px solid #eee;
+            }
+            
+            .message>div>.msg {
+                box-sizing: border-box;
+                height: 48px;
+                padding-left: 16px;
+                padding-right: 96px;
+                line-height: 48px;
+                color: #888;
+                font-size: 16px;
+            }
+            
+            .message>div>.time {
+                position: absolute;
+                top: 0;
+                right: 16px;
+                height: 48px;
+                line-height: 48px;
+                color: #888;
+                text-align: right;
+                font-size: 12px;
+            }
+            
+            .active {
+                -webkit-opacity: 0.7;
+                opacity: 0.7;
+            }
+			.info {
+          background: rgba(45,171,219,.9);
+          position:relative;/*设置子元素相对定位*/
+          color: white;
+          text-align: center;
+          width:50px;
+          height:50px;
+          -webkit-border-radius: 10%;
+          -moz-border-radius: 10%;
+          border-radius:10%;
+          display:inline-block;
+        }
+        .info:hover{
+          cursor: pointer;
+          background: rgba(45,171,219,.6);
+        }
+
+        .info-tip{
+            background:rgba(250,60,0,1);
+            position:absolute;/*根据父元素绝对定位*/
+            width:18px;
+            height:18px;
+            top:-7px;/*在父元素的内部的顶部*/
+            right:-7px;/*在父元素的内部的右边*/
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius:50%;
+			text-align:center;
+
+        }
+	.info1 {          background: rgba(45,171,219,.9);
+          position:relative;/*设置子元素相对定位*/
+          color: white;
+          text-align: center;
+          width:50px;
+          height:50px;
+          -webkit-border-radius: 10%;
+          -moz-border-radius: 10%;
+          border-radius:10%;
+          display:inline-block;
+}
+.info-tip1 {            background:rgba(250,60,0,1);
+            position:absolute;/*根据父元素绝对定位*/
+            width:18px;
+            height:18px;
+            top:-7px;/*在父元素的内部的顶部*/
+            right:-7px;/*在父元素的内部的右边*/
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius:50%;
+			text-align:center;
+}
+    .info-tip11 {background:rgba(250,60,0,1);
+            position:absolute;/*根据父元素绝对定位*/
+            width:18px;
+            height:18px;
+            top:-7px;/*在父元素的内部的顶部*/
+            right:-7px;/*在父元素的内部的右边*/
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius:50%;
+			text-align:center;
+}
+.info11 {background: rgba(45,171,219,.9);
+          position:relative;/*设置子元素相对定位*/
+          color: white;
+          text-align: center;
+          width:50px;
+          height:50px;
+          -webkit-border-radius: 10%;
+          -moz-border-radius: 10%;
+          border-radius:50%;
+          display:inline-block;
+}
+    .info12 {background: rgba(45,171,219,.9);
+          position:relative;/*设置子元素相对定位*/
+          color: white;
+          text-align: center;
+          width:50px;
+          height:50px;
+          -webkit-border-radius: 10%;
+          -moz-border-radius: 10%;
+          border-radius:50%;
+          display:inline-block;
+}
+    .info13 {background: rgba(45,171,219,.9);
+          position:relative;/*设置子元素相对定位*/
+          color: white;
+          text-align: center;
+          width:50px;
+          height:50px;
+          -webkit-border-radius: 10%;
+          -moz-border-radius: 10%;
+          border-radius:50%;
+          display:inline-block;
+}
+    .info14 {background: rgba(45,171,219,.9);
+          position:relative;/*设置子元素相对定位*/
+          color: white;
+          text-align: center;
+          width:50px;
+          height:50px;
+          -webkit-border-radius: 10%;
+          -moz-border-radius: 10%;
+          border-radius:50%;
+          display:inline-block;
+}
+    .info15 {background: rgba(45,171,219,.9);
+          position:relative;/*设置子元素相对定位*/
+          color: white;
+          text-align: center;
+          width:50px;
+          height:50px;
+          -webkit-border-radius: 10%;
+          -moz-border-radius: 10%;
+          border-radius:50%;
+          display:inline-block;
+}
+    .info16 {background: rgba(45,171,219,.9);
+          position:relative;/*设置子元素相对定位*/
+          color: white;
+          text-align: center;
+          width:50px;
+          height:50px;
+          -webkit-border-radius: 10%;
+          -moz-border-radius: 10%;
+          border-radius:50%;
+          display:inline-block;
+}
+    .info17 {background: rgba(45,171,219,.9);
+          position:relative;/*设置子元素相对定位*/
+          color: white;
+          text-align: center;
+          width:50px;
+          height:50px;
+          -webkit-border-radius: 10%;
+          -moz-border-radius: 10%;
+          border-radius:50%;
+          display:inline-block;
+}
+        </style>
+    </head>
+
+    <body>
+        
+		
+<div id="nav" class="nav" onClick="openNew1()" tapmode="" style="padding-bottom:8px; padding-top:8px; padding-right:12px;">
+<table style="color:#999999; font-size:12px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td width="66" rowspan="2" align="center"><div style=" background-image:url(https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c858c9bdb6abb8dfcbd9b8d6313939398067.jpg);background-size:cover;" class="info15"></div></td><td height="27" valign="bottom"><span style="font-size:16px; color:#000000;">不吃草的驴</span></td>
+<td width="180" rowspan="2" align="center"><div style="font-size:30px; color:#FF9933;" align="right">
+<div align="right">9 </div>
+</div></td></tr>
+<tr><td valign="top"><span class="subtitle">加入: 2018-12-20 19:13 上线:30天前</span></td></tr></table>
+</div>
+<div class="h1"></div>
+
+<div id="nav" class="nav" onClick="openNew1()" tapmode="" style="padding-bottom:8px; padding-top:8px; padding-right:12px;">
+<table style="color:#999999; font-size:12px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td width="66" rowspan="2" align="center"><div style=" background-image:url(https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c858c9bdb6abb8dfcbd9b8d6313939398067.jpg);background-size:cover;" class="info15"></div></td><td height="27" valign="bottom"><span style="font-size:16px; color:#000000;">不吃草的驴</span></td>
+<td width="180" rowspan="2" align="center"><div style="font-size:30px; color:#FF9933;" align="right">
+<div align="right">8 </div>
+</div></td></tr>
+<tr><td valign="top"><span class="subtitle">加入: 2018-12-20 19:13 上线:30天前</span></td></tr></table>
+</div>
+<div class="h1"></div>
+
+<div id="nav" class="nav" onClick="openNew1()" tapmode="" style="padding-bottom:8px; padding-top:8px; padding-right:12px;">
+<table style="color:#999999; font-size:12px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td width="66" rowspan="2" align="center"><div style=" background-image:url(https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c858c9bdb6abb8dfcbd9b8d6313939398067.jpg);background-size:cover;" class="info15"></div></td><td height="27" valign="bottom"><span style="font-size:16px; color:#000000;">不吃草的驴</span></td>
+<td width="180" rowspan="2" align="center"><div style="font-size:30px; color:#FF9933;" align="right">
+<div align="right">7 </div>
+</div></td></tr>
+<tr><td valign="top"><span class="subtitle">加入: 2018-12-20 19:13 上线:30天前</span></td></tr></table>
+</div>
+<div class="h1"></div>
+
+<div id="nav" class="nav" onClick="openNew1()" tapmode="" style="padding-bottom:8px; padding-top:8px; padding-right:12px;">
+<table style="color:#999999; font-size:12px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td width="66" rowspan="2" align="center"><div style=" background-image:url(https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c858c9bdb6abb8dfcbd9b8d6313939398067.jpg);background-size:cover;" class="info15"></div></td><td height="27" valign="bottom"><span style="font-size:16px; color:#000000;">不吃草的驴</span></td>
+<td width="180" rowspan="2" align="center"><div style="font-size:30px; color:#FF9933;" align="right">
+<div align="right">6 </div>
+</div></td></tr>
+<tr><td valign="top"><span class="subtitle">加入: 2018-12-20 19:13 上线:30天前</span></td></tr></table>
+</div>
+<div class="h1"></div>
+
+<div id="nav" class="nav" onClick="openNew1()" tapmode="" style="padding-bottom:8px; padding-top:8px; padding-right:12px;">
+<table style="color:#999999; font-size:12px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td width="66" rowspan="2" align="center"><div style=" background-image:url(https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c858c9bdb6abb8dfcbd9b8d6313939398067.jpg);background-size:cover;" class="info15"></div></td><td height="27" valign="bottom"><span style="font-size:16px; color:#000000;">不吃草的驴</span></td>
+<td width="180" rowspan="2" align="center"><div style="font-size:30px; color:#FF9933;" align="right">
+<div align="right">5 </div>
+</div></td></tr>
+<tr><td valign="top"><span class="subtitle">加入: 2018-12-20 19:13 上线:30天前</span></td></tr></table>
+</div>
+<div class="h1"></div>
+
+<div id="nav" class="nav" onClick="openNew1()" tapmode="" style="padding-bottom:8px; padding-top:8px; padding-right:12px;">
+<table style="color:#999999; font-size:12px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td width="66" rowspan="2" align="center"><div style=" background-image:url(https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c858c9bdb6abb8dfcbd9b8d6313939398067.jpg);background-size:cover;" class="info15"></div></td><td height="27" valign="bottom"><span style="font-size:16px; color:#000000;">不吃草的驴</span></td>
+<td width="180" rowspan="2" align="center"><div style="font-size:30px; color:#FF9933;" align="right">
+<div align="right">4 </div>
+</div></td></tr>
+<tr><td valign="top"><span class="subtitle">加入: 2018-12-20 19:13 上线:30天前</span></td></tr></table>
+</div>
+<div class="h1"></div>
+
+<div id="nav" class="nav" onClick="openNew1()" tapmode="" style="padding-bottom:8px; padding-top:8px; padding-right:12px;">
+<table style="color:#999999; font-size:12px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td width="66" rowspan="2" align="center"><div style=" background-image:url(https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c858c9bdb6abb8dfcbd9b8d6313939398067.jpg);background-size:cover;" class="info15"></div></td><td height="27" valign="bottom"><span style="font-size:16px; color:#000000;">不吃草的驴</span></td>
+<td width="180" rowspan="2" align="center"><div style="font-size:30px; color:#FF9933;" align="right">
+<div align="right">3 </div>
+</div></td></tr>
+<tr><td valign="top"><span class="subtitle">加入: 2018-12-20 19:13 上线:30天前</span></td></tr></table>
+</div>
+<div class="h1"></div>
+
+<div id="nav" class="nav" onClick="openNew1()" tapmode="" style="padding-bottom:8px; padding-top:8px; padding-right:12px;">
+<table style="color:#999999; font-size:12px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td width="66" rowspan="2" align="center"><div style=" background-image:url(https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c858c9bdb6abb8dfcbd9b8d6313939398067.jpg);background-size:cover;" class="info15"></div></td><td height="27" valign="bottom"><span style="font-size:16px; color:#000000;">不吃草的驴</span></td>
+<td width="180" rowspan="2" align="center"><div style="font-size:30px; color:#FF9933;" align="right">
+<div align="right">2 </div>
+</div></td></tr>
+<tr><td valign="top"><span class="subtitle">加入: 2018-12-20 19:13 上线:30天前</span></td></tr></table>
+</div>
+<div class="h1"></div>
+
+<div id="nav" class="nav" onClick="openNew1()" tapmode="" style="padding-bottom:8px; padding-top:8px; padding-right:12px;">
+<table style="color:#999999; font-size:12px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td width="66" rowspan="2" align="center"><div style=" background-image:url(https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c858c9bdb6abb8dfcbd9b8d6313939398067.jpg);background-size:cover;" class="info15"></div></td><td height="27" valign="bottom"><span style="font-size:16px; color:#000000;">不吃草的驴</span></td>
+<td width="180" rowspan="2" align="center"><div style="font-size:30px; color:#FF9933;" align="right">
+<div align="right">1 </div>
+</div></td></tr>
+<tr><td valign="top"><span class="subtitle">加入: 2018-12-20 19:13 上线:30天前</span></td></tr></table>
+</div>
+<div class="h1"></div>
+		
+		
+        <section id="message" class="message">
+        </section>
+    </body>
+    <script id="template" type="text/template">
+        {{~ it:data }}
+        <div>
+            <span class="msg">{{= data.msg }}</span>
+            <span class="time">{{= data.receiveTime }}</span>
+        </div>
+        {{~}}
+    </script>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/doT.min.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+
+        };
+    </script>
+
+</html>

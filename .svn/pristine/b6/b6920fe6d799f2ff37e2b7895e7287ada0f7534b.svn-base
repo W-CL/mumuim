@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title>APICloud APP</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style>
+            header {
+	background-color: #0080FF;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #0080FF;
+            }
+            
+            h1 {
+                height: 40px;
+                line-height: 40px;
+                color: #ffffff;
+                color: #ffffff;
+                font-size: 18px;
+                text-align: center;
+            }
+            
+            .back {
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+                width: 40px;
+                height: 40px;
+                background: url(../image/header/back.png) center center no-repeat;
+                background-size: 15px auto;
+            }
+            
+            nav {
+                position: relative;
+                height: 180px;
+                background-color: #0080FF;
+                display: flex;
+                display: -webkit-flex;
+                display: flex;
+                border-bottom: solid #f0f0f0 1px;
+            }
+            
+            nav>div {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+                width: 100%;
+                line-height: 50px;
+                color: #B0D8FF;
+                font-size: 15px;
+                text-align: center;
+            }
+            
+            .nav-act {
+                color: #FFFFFF;
+            }
+            
+            .nav-hov {
+                background-color: rgba(250, 240, 230, 0.7);
+            }
+            
+            mark {
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+                text-align: center;
+                background: transparent;
+                -webkit-transition: 300ms;
+            }
+            
+            mark>img {
+                height: 8px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header id="header">
+            <div class="back event-back"></div>
+            <h1>我的推广</h1>
+        </header>
+		<div style="height:130px; background-color:#0080FF;">
+		<div style=" color:#CCE6FF; padding-top:10px;" align="center">昨日收益(金)</div>
+		<div style="font-size:50px; color:#FFFFFF;" align="center">0.57</div>
+		<div style=" color:#CCE6FF;" align="center">总收益 8331.03 金</div>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+		</div>
+        <nav id="nav">
+            <div class="nav-act" tapmode="nav-hov" onClick="fnChange(0);">总推(1809)</div>
+            <div tapmode="nav-hov" onClick="fnChange(1);">有效(190)</div>
+            <div tapmode="nav-hov" onClick="fnChange(2);">收益(18k)</div>
+            <mark></mark>
+        </nav>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/common.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+            fnReady();
+
+            fnInit();
+
+            api.openFrameGroup({
+                name: 'message_group',
+                scrollEnabled: true,
+                rect: {
+                    x: 0,
+                    y: headerHeight + navHeight,
+                    w: 'auto',
+                    h: 'auto'
+                },
+                index: 0,
+                frames: [{
+                    name: 'tuiguang_frame',
+                    url: 'tuiguang_frame.html'
+                }, {
+                    name: 'tuiguang_frame1',
+                    url: 'tuiguang_frame1.html'
+                }, {
+                    name: 'tuiguang_frame2',
+                    url: 'tuiguang_frame2.html'
+                }]
+            }, function(ret, err) {
+                fnChangeStyle(ret.index);
+            });
+        };
+
+        var navs, mark;
+
+        function fnInit() {
+            navs = $api.domAll(nav, 'div');
+            mark = $api.dom(nav, 'mark');
+            mark.style.width = (api.winWidth / 3) + 'px';
+        };
+
+        function fnChange(index) {
+            fnChangeStyle(index);
+            api.setFrameGroupIndex({
+                name: 'message_group',
+                index: index,
+                scroll: true
+            });
+        };
+
+        function fnChangeStyle(index) {
+            for (var i = 0; i < navs.length; i++) {
+                if (i == index) {
+                    $api.addCls(navs[i], 'nav-act');
+                } else {
+                    $api.removeCls(navs[i], 'nav-act');
+                }
+            };
+
+            var markPosX = (api.winWidth / 3) * index + 'px';
+            $api.css(mark, '-webkit-transform: translate(' + markPosX + ', 0)');
+        };
+    </script>
+
+</html>

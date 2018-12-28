@@ -1,0 +1,329 @@
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta http-equiv="expires" content="0">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no" media="screen">
+<title>对话框</title>
+<style type="text/css">
+	body{background:url(images/yuyin_bg.png) no-repeat;background-size:100%;}
+	@media all and (min-width: 640px) {
+	    body,html,.wenwen-footer,.speak_window{width:640px!important;margin:0 auto}
+	    .speak_window,.wenwen-footer{left:50%!important;margin-left:-320px}
+	}
+	input,button{outline:none;}
+	.wenwen-footer{width:100%;position:fixed;bottom:-5px;left:0;background:#fff;padding:3%;border-top:solid 1px #ddd;box-sizing:border-box;}
+	.wenwen_btn,.wenwen_help{width:15%;text-align:center;}
+	.wenwen_btn img,.wenwen_help img{height:40px;}
+	.wenwen_text{height:40px;border-radius:5px;border:solid 1px #636162;box-sizing:border-box;width:66%;text-align:center;overflow:hidden;margin-left:2%;}
+	.circle-button{padding:0 5px;}
+	.wenwen_text .circle-button{font-size:14px;color:#666;line-height:38px;}
+	.write_box{background:#fff;width:100%;height:40px;line-height:40px;display:none;}
+	.write_box input{height:40px;padding:0 5px;line-height:40px;width:100%;box-sizing:border-box;border:0;}
+	.wenwen_help button{width:95%;background:#42929d;color:#fff;border-radius:5px;border:0;height:40px;display:none;}
+	#wenwen{height:100%;}
+	.speak_window{overflow-y:scroll;height:100%;width:100%;position:fixed;top:0;left:0;}
+	.speak_box{margin-bottom:70px;padding:10px;}
+	.question,.answer{margin-bottom:1rem;}
+	.question{text-align:right;}
+	.question>div{display:inline-block;}
+	.left{float:left;}
+	.right{float:right;}
+	.clear{clear:both;}
+	.heard_img{height:60px;width:60px;border-radius:5px;overflow:hidden;background:#ddd;}
+	.heard_img img{width:100%;height:100%}
+	.question_text,.answer_text{box-sizing:border-box;position:relative;display:table-cell;min-height:60px;}
+	.question_text{padding-right:20px;}
+	.answer_text{padding-left:20px;}
+	.question_text p,.answer_text p{border-radius:10px;padding:.5rem;margin:0;font-size:14px;line-height:28px;box-sizing:border-box;vertical-align:middle;display:table-cell;height:60px;word-wrap:break-word;}
+	.answer_text p{background:#fff;}
+	.question_text p{background:#42929d;color:#fff;text-align:left;}
+	.question_text i,.answer_text i{width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;position:absolute;top:25px;}
+	.answer_text i{border-right:10px solid #fff;left:10px;}
+	.question_text i{border-left:10px solid #42929d;right:10px;}
+	.answer_text p a{color:#42929d;display:inline-block;}
+	audio{display:none;}
+	.saying{position:fixed;bottom:30%;left:50%;width:120px;margin-left:-60px;display:none;}
+	.saying img{width:100%;}
+	.write_list{position:absolute;left:0;width:100%;background:#fff;border-top:solid 1px #ddd;padding:5px;line-height:30px;}
+</style>
+<style type="text/css" abt="234"></style><script>//console.log('a')
+</script><script>//remove 17173 video ad
+doAdblock();
+function doAdblock(){
+    (function() {
+        function A() {}
+        A.prototype = {
+            rules: {
+                '17173_in':{
+                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFile(Customer)?\.swf/,
+                    'replace':"http://swf.adtchrome.com/17173_in_20150522.swf"
+                },
+                '17173_out':{
+                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFileFirstpage\.swf/,
+                    'replace':"http://swf.adtchrome.com/17173_out_20150522.swf"
+                },
+                '17173_live':{
+                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream(_firstpage)?\.swf/,
+                    'replace':"http://swf.adtchrome.com/17173_stream_20150522.swf"
+                },
+                '17173_live_out':{
+                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream_(custom)?Out\.swf/,
+                    'replace':"http://swf.adtchrome.com/17173.out.Live.swf"
+                }
+            },
+            _done: null,
+            get done() {
+                if(!this._done) {
+                    this._done = new Array();
+                }
+                return this._done;
+            },
+            addAnimations: function() {
+                var style = document.createElement('style');
+                style.type = 'text/css';
+                style.innerHTML = 'object,embed{\
+                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;\
+                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;\
+                -o-animation-duration:.001s;-o-animation-name:playerInserted;\
+                animation-duration:.001s;animation-name:playerInserted;}\
+                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}';
+                document.getElementsByTagName('head')[0].appendChild(style);
+            },
+            animationsHandler: function(e) {
+                if(e.animationName === 'playerInserted') {
+                    this.replace(e.target);
+                }
+            },
+            replace: function(elem) {
+                if(this.done.indexOf(elem) != -1) return;
+                this.done.push(elem);
+                var player = elem.data || elem.src;
+                if(!player) return;
+                var i, find, replace = false;
+                for(i in this.rules) {
+                    find = this.rules[i]['find'];
+                    if(find.test(player)) {
+                        replace = this.rules[i]['replace'];
+                        if('function' === typeof this.rules[i]['preHandle']) {
+                            this.rules[i]['preHandle'].bind(this, elem, find, replace, player)();
+                        }else{
+                            this.reallyReplace.bind(this, elem, find, replace)();
+                        }
+                        break;
+                    }
+                }
+            },
+            reallyReplace: function(elem, find, replace) {
+                elem.data && (elem.data = elem.data.replace(find, replace)) || elem.src && ((elem.src = elem.src.replace(find, replace)) && (elem.style.display = 'block'));
+                var b = elem.querySelector("param[name='movie']");
+                this.reloadPlugin(elem);
+            },
+            reloadPlugin: function(elem) {
+                var nextSibling = elem.nextSibling;
+                var parentNode = elem.parentNode;
+                parentNode.removeChild(elem);
+                var newElem = elem.cloneNode(true);
+                this.done.push(newElem);
+                if(nextSibling) {
+                    parentNode.insertBefore(newElem, nextSibling);
+                } else {
+                    parentNode.appendChild(newElem);
+                }
+            },
+            init: function() {
+                var handler = this.animationsHandler.bind(this);
+                document.body.addEventListener('webkitAnimationStart', handler, false);
+                document.body.addEventListener('msAnimationStart', handler, false);
+                document.body.addEventListener('oAnimationStart', handler, false);
+                document.body.addEventListener('animationstart', handler, false);
+                this.addAnimations();
+            }
+        };
+        new A().init();
+    })();
+}
+//remove baidu search ad
+if(document.URL.indexOf('www.baidu.com') >= 0){
+    if(document && document.getElementsByTagName && document.getElementById && document.body){
+        var aa = function(){
+            var all = document.body.querySelectorAll("#content_left div,#content_left table");
+            for(var i = 0; i < all.length; i++){
+                if(/display:\s?(table|block)\s!important/.test(all[i].getAttribute("style"))){all[i].style.display= "none";all[i].style.visibility='hidden';}
+            }
+            all = document.body.querySelectorAll('.result.c-container[id="1"]');
+            //if(all.length == 1) return;
+            for(var i = 0; i < all.length; i++){
+                if(all[i].innerHTML && all[i].innerHTML.indexOf('广告')>-1){
+                    all[i].style.display= "none";all[i].style.visibility='hidden';
+                }
+            }
+        }
+        aa();
+        document.getElementById('wrapper_wrapper').addEventListener('DOMSubtreeModified',aa)
+    };
+}
+//remove sohu video ad
+if (document.URL.indexOf("tv.sohu.com") >= 0){
+    if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
+}
+//remove 56.com video ad
+if (document.URL.indexOf("56.com") >= 0){
+    if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
+}
+//fore iqiyi enable html5 player function
+if (document.URL.indexOf("iqiyi.com") >= 0){
+    if (document.cookie.indexOf("player_forcedType=h5_VOD")==-1){
+        document.cookie='player_forcedType=h5_VOD'
+        if(localStorage.reloadTime && Date.now() - parseInt(localStorage.reloadTime)<60000){
+            console.log('no reload')
+        }else{
+            location.reload()
+            localStorage.reloadTime = Date.now();
+        }
+    }
+}
+</script><style type="text/css">object,embed{                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;                -o-animation-duration:.001s;-o-animation-name:playerInserted;                animation-duration:.001s;animation-name:playerInserted;}                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}
+</style>
+</head>
+<body>
+<div class="speak_window">
+	<div class="speak_box">
+		<div class="answer">
+			<div class="heard_img left"><img src="./liaotian_files/dglvyou.jpg"></div>
+			<div class="answer_text">
+				<p>Hey，您的专属导游在此！您可以向我提问哦！有时微信会跟我闹点小脾气，试试关闭当前页面重新进入就ok啦!</p>
+				<i></i>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="saying">
+	<img src="./liaotian_files/saying.gif">
+</div>
+<div class="wenwen-footer">
+	<div class="wenwen_btn left" onClick="to_write()"><img src="./liaotian_files/jp_btn.png"></div>
+	<div class="wenwen_text left">
+	    <div class="write_box">
+	        <input type="text" class="left" onKeyUp="keyup()" placeholder="请输入关键字">
+	    </div>   
+	    <div class="circle-button" id="wenwen">
+	        按住 说话
+	    </div>
+	</div>
+	<div class="wenwen_help right">
+	    <a href="http://www.dgtour.com.cn/yuyin/index.html">
+	        <img src="./liaotian_files/help_btn.png">
+	    </a>
+	    <button onClick="up_say()" class="right">发送</button>
+	</div>
+	<div style="opacity:0;" class="clear"></div>
+</div>
+<script type="text/javascript" src="./liaotian_files/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	function to_write(){
+	    $('.wenwen_btn img').attr('src','images/yy_btn.png');
+	    $('.wenwen_btn').attr('onclick','to_say()');
+	    $('.write_box,.wenwen_help button').show();
+	    $('.circle-button,.wenwen_help a').hide();
+	    $('.write_box input').focus();
+	    for_bottom();
+	}
+
+	function to_say(){
+		$('.write_list').remove();
+	    $('.wenwen_btn img').attr('src','images/jp_btn.png');
+	    $('.wenwen_btn').attr('onclick','to_write()');
+	    $('.write_box,.wenwen_help button').hide();
+	    $('.circle-button,.wenwen_help a').show();
+	}
+
+	function up_say(){
+		$('.write_list').remove();
+	    var text = $('.write_box input').val(),
+	        str  = '<div class="question">';
+	        str += '<div class="heard_img right"><img src="images/dglvyou.jpg"/></div>';
+	        str += '<div class="question_text clear"><p>'+text+'</p><i></i>';
+	        str += '</div></div>';
+
+	    if(text == ''){
+	        alert('请输入提问！');
+	        $('.write_box input').focus();
+	    }else{
+	        $('.speak_box').append(str);
+	        $('.write_box input').val('');
+	        $('.write_box input').focus();
+	        autoWidth();
+	        for_bottom();
+	        setTimeout(function(){
+	            var ans  = '<div class="answer"><div class="heard_img left"><img src="images/dglvyou.jpg"/></div>';
+	            	ans += '<div class="answer_text"><p>您发送的文字是：'+text+'</p><i></i>';
+	        		ans += '</div></div>';
+	        	$('.speak_box').append(ans);
+				for_bottom();
+	        },1000);
+	    }
+	}
+
+	function keyup(){
+		var footer_height = $('.wenwen-footer').outerHeight(),
+			text = $('.write_box input').val(),
+			str = '<div class="write_list">'+text+'</div>';
+		if (text == '' || text == undefined){
+			$('.write_list').remove();
+		}else{
+			$('.wenwen-footer').append(str);
+			$('.write_list').css('bottom',footer_height);
+		}
+	}
+
+	var wen  = document.getElementById('wenwen');
+	function _touch_start(event){
+        event.preventDefault();
+        $('.wenwen_text').css('background','#c1c1c1');
+        $('.wenwen_text span').css('color','#fff');
+        $('.saying').show();
+    }
+
+    function _touch_end(event){
+        event.preventDefault();
+        $('.wenwen_text').css('background','#fff');
+        $('.wenwen_text .circle-button').css('color','#666');    
+        $('.saying').hide();
+        var str  = '<div class="question">';
+	        str += '<div class="heard_img right"><img src="images/dglvyou.jpg"/></div>';
+	        str += '<div class="question_text clear"><p>不好意思，我听不清！</p><i></i>';
+	        str += '</div></div>';
+		$('.speak_box').append(str);
+		for_bottom();
+        setTimeout(function(){
+        	var ans  = '<div class="answer"><div class="heard_img left"><img src="images/dglvyou.jpg"/></div>';
+	        	ans += '<div class="answer_text"><p>我不知道你在说什么?</p><i></i>';
+	    		ans += '</div></div>';
+	    	$('.speak_box').append(ans);
+			for_bottom();
+        },1000);       
+    }
+
+    wen.addEventListener("touchstart", _touch_start, false);
+    wen.addEventListener("touchend", _touch_end, false);
+    
+    function for_bottom(){
+		var speak_height = $('.speak_box').height();
+		$('.speak_box,.speak_window').animate({scrollTop:speak_height},500);
+	}
+	
+	function autoWidth(){
+		$('.question_text').css('max-width',$('.question').width()-60);
+	}
+	autoWidth();
+</script>
+
+
+</body></html>
