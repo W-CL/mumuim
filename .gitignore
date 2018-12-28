@@ -1,3 +1,11 @@
 .svn
 .svn*
 .idea
+ /.svn/*
+.svn/format
+*.svn-base
+*.svn-base
+.svn/entries
+.svn/format
+*.svn-base*
+
