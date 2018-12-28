@@ -8,10 +8,11 @@
 .svn/entries
 .svn/format
 *.svn-base*
-
+.svn.db
 *.db
 .svn/format
 .svn/entries
 .filelist.txt
 *.db
 .idea/workspace.xml
+.idea*
