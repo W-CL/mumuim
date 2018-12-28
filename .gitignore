@@ -9,3 +9,7 @@
 .svn/format
 *.svn-base*
 
+*.db
+.svn/format
+.svn/entries
+.filelist.txt
