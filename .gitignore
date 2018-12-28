@@ -13,3 +13,4 @@
 .svn/format
 .svn/entries
 .filelist.txt
+*.db
