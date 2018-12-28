@@ -166,10 +166,24 @@
     <script type="text/javascript">
         apiready = function() {
             users = $api.getStorage("users");
-            fnReadyOpenWin();
-            fnInit();
-            fnInitEvent();
-            fnSetInfo();
+            console.log(JSON.stringify(users))
+            if(!users){
+                api.openWin({
+                    name: 'xiangxi',
+                    url: 'login_frame.html',
+                    pageParam: {
+                        name: 'test'
+                    }
+                });
+            }else{
+                fnReadyOpenWin();
+                fnInit();
+                fnInitEvent();
+                fnSetInfo();
+            }
+
+
+
         };
 
         var avatar, city, gender, birthday;
@@ -194,9 +208,6 @@
 //{"id":1024,"uc_uid":0,"tb_uid":0,"username":"qweqwe","email":"","gender":0,"intro":"","byear":0,"bmonth":0,"bday":0,"province":"","city":"北京","score":0,"score_level":0,"qq":"","address":"","realname":"","mobile":"","reg_ip":"192.168.1.105","reg_time":1545887177,"last_time":1545887177,"sign_time":1545887177,"last_ip":"","login_count":2,"status":1,"tuisong":1,"money":"0.00","weixin":"","photo":"","online":0,"auto_add":0,"tuijian_id":0}
             city.innerHTML     = users.city || '';
             gender.innerHTML   = users.gender || '';
-            birthday.innerHTML = users.birthday || '';
-
-
             api.sendEvent({
                 name: 'setuserinfo'
             });
@@ -287,25 +298,40 @@
             api.actionSheet({
                 title: '请选择',
                 cancelTitle: '取消',
-                buttons: buttons
+                buttons: buttons,
             }, function(ret, err) {
+                console.log(ret.buttonIndex);
                 if (3 == ret.buttonIndex) {
                     return;
                 }
 
                 $api.setStorage('gender', buttons[ret.buttonIndex - 1]);
+                api.ajax({
+                    url:'http://192.168.1.109:2356/index/phone/request',
+                    method:'post',
+                    data:{
+                        values: {
+                            "ac" :"upUser",
+                            "gender" : ret.buttonIndex,
+                            "uid":users.id,
+                        },
+                    }
+                },function(re,er){
+                    if (re.code == 200){
+                        api.toast({
+                            msg: '修改用户信息成功！!',
+                            duration: 3000,
+                            location: 'bottom'
+                        });
+                    }
+
+                });
                 fnSetInfo();
             });
         };
 
         function fnLogout() {
-            $api.rmStorage('accessToken');
-            $api.rmStorage('avatar');
-            $api.rmStorage('account');
-            $api.rmStorage('gender');
-            $api.rmStorage('birthday');
-            $api.rmStorage('avatar');
-
+          $api.clearStorage();
             api.sendEvent({
                 name: 'logout'
             });

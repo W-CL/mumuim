@@ -117,7 +117,10 @@
             <img src="../image/my/personal_bkg.jpg" class="loginbg">
             <img id="userAvatar" src="../image/my/profile_default.png" class="personal_logo">
             <div class="userinfo">
-                <div id="userAccount" class="title">点击登录</div>
+                <div id="userAccount" class="title">
+                    <span class="user_name" id="userName">点击登录</span>
+                    <span class="user_gender" > <img style="height: 10px;width: 10px;" id="userGender" src="../image/icon/head.png" class="personal_logo"></span>
+                </div>
                 <div id="userRegion" class="subtitle">常居地：未设置</div>
             </div>
             <img src="../image/my/personal_icon_arrow.png" class="person_arrow">
@@ -221,7 +224,7 @@
         };
 
         function fnUpdateUserInfo() {
-            userAccount.innerHTML = users.username || '点击登陆';
+            userName.innerHTML = users.username || '点击登陆';
             var src = $api.getStorage('avatar') || '../image/my/profile_default.png';
             api.imageCache({
                 url: src
@@ -230,6 +233,9 @@
                 console.log(ret.url);
             });
             userRegion.innerHTML = '常居地：' + users.city || '常居地：未设置';
+            var gender=users.gender;
+            var src= gender==1 ?'../image/my/profile_default.png' :"";
+            console.log(src);
         };
 
         function fnResetUserInfo() {
