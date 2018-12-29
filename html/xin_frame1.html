@@ -135,7 +135,6 @@ html,body {min-height: 100%;background-color: #f3f3f3;height: 100%;}
     users = $api.getStorage("users");
     $('#num').bind('input propertychange', function() {
       var username = $(this).val();
-
       api.ajax({
         url:'http://www1.msc8i8.cn/index/phone/request',
         method:'post',
@@ -147,7 +146,6 @@ html,body {min-height: 100%;background-color: #f3f3f3;height: 100%;}
           },
         }
       },function(ret,err){
-         console.log(JSON.stringify(ret))
         if (ret.code == 200){
           api.toast({
             msg: '搜索用户成功！!',

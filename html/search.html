@@ -130,11 +130,10 @@
             var key =  $api.byId('searchText').value
             var pidkey = users.id+"_pid"
             var pid = $api.getStorage(pidkey);
-            console.log(users.id)
             if(pid){
                 api.openFrame({
                     name: 'wholesale_frame',
-                    url: 'https://ai.taobao.com/search/index.htm?key='+key+'&pid='+pid,//这个我本地一个服务器。是用tp搭的，貌似外链都需要http://开头，不然会报错
+                    url: 'https://ai.taobao.com/search/index.htm?key='+key+'&pid='+pid,
                     rect: {
                         x:0,
                         y:0,
@@ -154,7 +153,7 @@
                     values: {
                         "ac" :"search",
                         "key":key,
-                        "uid":1024,
+                        "uid":users.id,
                     },
                 }
             },function(ret,err) {
@@ -176,7 +175,6 @@
                         }
                     });
                 }
-
             });
             }
         };
