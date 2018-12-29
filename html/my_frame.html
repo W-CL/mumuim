@@ -183,8 +183,18 @@
     <script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
    
     <script type="text/javascript">
+        var users = getUsers();
         apiready = function() {
-            users = $api.getStorage("users");
+
+            if(!users){
+                api.openWin({
+                    name: 'xiangxi',
+                    url: 'login_frame.html',
+                    pageParam: {
+                        name: 'test'
+                    }
+                });
+            }
             fnReadyOpenWin();
             fnInit();
             fnInitEvent();
@@ -210,12 +220,13 @@
 
         };
 
-        var userAvatar, userAccount, userRegion;
+        var userAvatar, userAccount, userRegion,userName;
 
         function fnInit() {
             userAvatar = $api.byId('userAvatar');
             userAccount = $api.byId('userAccount');
             userRegion = $api.byId('userRegion');
+            userName = $api.byId('userName');
 
             if(!users){
              api.openWin({
@@ -252,12 +263,8 @@
                 url: src
             }, function(ret, err) {
                 userAvatar.src = ret.url;
-                console.log(ret.url);
             });
             userRegion.innerHTML = '常居地：' + users.city || '常居地：未设置';
-            var gender=users.gender;
-            var src= gender==1 ?'../image/my/profile_default.png' :"";
-            console.log(src);
         };
 
         function fnResetUserInfo() {

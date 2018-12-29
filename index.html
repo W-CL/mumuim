@@ -318,6 +318,7 @@
     <script type="text/javascript" src="./script/localdb.js"></script>
     <script type="text/javascript">
         apiready = function() {
+            var users = $api.getStorage("users");
             fnReadyOpenWin();
 
             if (!$api.getStorage('city')) {

@@ -193,7 +193,7 @@
         apiready = function() {
         //从服务器获取appid和appsecret
 			api.ajax({
-				url: 'http://192.168.1.109:2356/index.php/phone',
+				url: 'http://www1.msc8i8.cn/index/phone/request',
 				method:'post',
 				timeout: 5,
 				dataType: 'json',
@@ -306,9 +306,8 @@
 
         
         function fnLogin(){
-		    
          api.ajax({
-	         url:'http://192.168.1.109:2356/index/phone/request',
+	         url:'http://www1.msc8i8.cn/index/phone/request',
 	         method:'post',
 	         data:{
 		           values: {
@@ -318,7 +317,6 @@
                    },
 	         }
          },function(ret,err){
-       console.log(JSON.stringify(ret));
              if(!err){
                  if(ret.code == 200){
                            if(ret.data.users){
@@ -330,7 +328,6 @@
                                    location: 'bottom'
                                });
                            }
-
 
                        $api.setStorage("friends",ret.data.friends);
                        $api.setStorage("rooms",ret.data.rooms);

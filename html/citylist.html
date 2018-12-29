@@ -45,10 +45,8 @@
             fnReady();
             fnInitCityList();
         };
-
         function fnInitCityList() {
             var uicitylist = api.require('UICityList');
-
             uicitylist.open({
                 rect: {
                     x: 0,
@@ -89,14 +87,11 @@
                 fixedOn: api.frameName,
                 placeholder: '输入城市名或首字母查询'
             }, function(ret, err) {
-                console.log(JSON.stringify(ret));
                 if (ret.eventType == 'selected') {
                     $api.setStorage('city', ret.cityInfo.city);
-
                     api.sendEvent({
                         name: 'cityChange'
                     });
-
                     api.closeWin();
                 }
             });

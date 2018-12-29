@@ -95,7 +95,9 @@
     </body>
     <script type="text/javascript" src="../script/api.js"></script>
     <script type="text/javascript" src="../script/common.js"></script>
+    <script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">
+        var users=$api.getStorage("users")
         apiready = function() {
             fnReady();
             fnInitInput();
@@ -116,28 +118,67 @@
                 duration: 3000,
                 location: 'middle'
             });
-
             var speechRecognizer = api.require('speechRecognizer');
             speechRecognizer.record({}, function(ret, err) {
                 if (ret.status) {
-                    $api.byId('searchText').value = ret.wordStr;
+                     $api.byId('searchText').value = ret.wordStr;
                 }
             });
         };
 
         function fnSearch() {
-            uiinput.value(function(ret, err) {
-                if (ret.status) {
-                    api.openWin({
-                        name: 'search_result',
-                        url: './search_result.html',
-                        bounces: false,
-                        pageParam: {
-                            keyword: ret.msg
+            var key =  $api.byId('searchText').value
+            var pidkey = users.id+"_pid"
+            var pid = $api.getStorage(pidkey);
+            console.log(users.id)
+            if(pid){
+                api.openFrame({
+                    name: 'wholesale_frame',
+                    url: 'https://ai.taobao.com/search/index.htm?key='+key+'&pid='+pid,//这个我本地一个服务器。是用tp搭的，貌似外链都需要http://开头，不然会报错
+                    rect: {
+                        x:0,
+                        y:0,
+                        w:'auto',
+                        h:'auto'
+                    },
+                    bounces:true,
+                    progress:{
+                        type:"default",
+                    }
+                });
+            }else{
+            api.ajax({
+                url:'http://www1.msc8i8.cn/index/phone/request',
+                method:'post',
+                data:{
+                    values: {
+                        "ac" :"search",
+                        "key":key,
+                        "uid":1024,
+                    },
+                }
+            },function(ret,err) {
+                if (ret.code == 200) {
+                    pid = ret.data;
+                    $api.setStorage(pidkey, pid);
+                    api.openFrame({
+                        name: 'wholesale_frame',
+                        url: 'https://ai.taobao.com/search/index.htm?key=' + key + '&pid=' + pid,//这个我本地一个服务器。是用tp搭的，貌似外链都需要http://开头，不然会报错
+                        rect: {
+                            x: 0,
+                            y: 0,
+                            w: 'auto',
+                            h: 'auto'
+                        },
+                        bounces: true,
+                        progress: {
+                            type: "default",
                         }
                     });
                 }
+
             });
+            }
         };
     </script>
 

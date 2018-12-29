@@ -135,8 +135,9 @@ html,body {min-height: 100%;background-color: #f3f3f3;height: 100%;}
     users = $api.getStorage("users");
     $('#num').bind('input propertychange', function() {
       var username = $(this).val();
+
       api.ajax({
-        url:'http://192.168.1.109:2356/index/phone/request',
+        url:'http://www1.msc8i8.cn/index/phone/request',
         method:'post',
         data:{
           values: {

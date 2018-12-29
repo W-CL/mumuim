@@ -166,7 +166,6 @@
     <script type="text/javascript">
         apiready = function() {
             users = $api.getStorage("users");
-            console.log(JSON.stringify(users))
             if(!users){
                 api.openWin({
                     name: 'xiangxi',
@@ -221,7 +220,7 @@
             }, function(ret, err) {
                 $api.setStorage('birthday', ret.year + '-' + ret.month + '-' + ret.day);
                 api.ajax({
-                    url:'http://192.168.1.109:2356/index/phone/request',
+                    url:'http://www1.msc8i8.cn/index/phone/request',
                     method:'post',
                     data:{
                         values: {
@@ -264,11 +263,10 @@
                     targetWidth: 100,
                     targetHeight: 100
                 }, function(ret, err) {
-                    console.log(ret.data);
                     if (ret && ret.data) {
                         $api.setStorage('avatar', ret.data);
                         api.ajax({
-                            url:'http://192.168.1.109:2356/index/phone/request',
+                            url:'http://www1.msc8i8.cn/index/phone/request',
                             method:'post',
                             data:{
                                 values: {
@@ -300,14 +298,13 @@
                 cancelTitle: '取消',
                 buttons: buttons,
             }, function(ret, err) {
-                console.log(ret.buttonIndex);
                 if (3 == ret.buttonIndex) {
                     return;
                 }
 
                 $api.setStorage('gender', buttons[ret.buttonIndex - 1]);
                 api.ajax({
-                    url:'http://192.168.1.109:2356/index/phone/request',
+                    url:'http://www1.msc8i8.cn/index/phone/request',
                     method:'post',
                     data:{
                         values: {
@@ -331,7 +328,7 @@
         };
 
         function fnLogout() {
-          $api.clearStorage();
+            logout();
             api.sendEvent({
                 name: 'logout'
             });
