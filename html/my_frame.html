@@ -113,7 +113,7 @@
     </head>
 
     <body>
-        <div class="login open-win" win="person_info" >
+        <div class="login person_info"  >
             <img src="../image/my/personal_bkg.jpg" class="loginbg">
             <img id="userAvatar" src="../image/my/profile_default.png" class="personal_logo">
             <div class="userinfo">
@@ -180,12 +180,34 @@
     </body>
     <script type="text/javascript" src="../script/api.js"></script>
     <script type="text/javascript" src="../script/common.js"></script>
+    <script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+   
     <script type="text/javascript">
         apiready = function() {
             users = $api.getStorage("users");
             fnReadyOpenWin();
             fnInit();
             fnInitEvent();
+            $(document).on('click','.person_info',function(){
+                if(!users){
+                    api.openWin({
+                        name: 'xiangxi',
+                        url: 'login_frame.html',
+                        pageParam: {
+                            name: 'test'
+                        }
+                    });
+                }else{
+                    api.openWin({
+                        name: 'xiangxi',
+                        url: 'person_info_frame.html',
+                        pageParam: {
+                            name: 'test'
+                        }
+                    });
+                }
+            });
+
         };
 
         var userAvatar, userAccount, userRegion;
