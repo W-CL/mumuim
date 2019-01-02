@@ -420,8 +420,7 @@
             continuous: true,		
             disableScroll: true,		
             stopPropagation: true,		
-            callback: function (index, element) {		
-                console.log();		
+            callback: function (index, element) {
                 var $actA = $api.dom($pointer, 'a.active');		
                 $api.removeCls($actA, 'active');		
                 $api.addCls($api.eq($pointer, index + 1), 'active');		

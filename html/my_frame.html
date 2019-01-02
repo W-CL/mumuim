@@ -183,63 +183,34 @@
     <script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
    
     <script type="text/javascript">
-        var users = getUsers();
+       
         apiready = function() {
-
-            if(!users){
-                api.openWin({
-                    name: 'xiangxi',
-                    url: 'login_frame.html',
-                    pageParam: {
-                        name: 'test'
-                    }
-                });
-            }
+            users = $api.getStorage("users")
             fnReadyOpenWin();
             fnInit();
             fnInitEvent();
-            $(document).on('click','.person_info',function(){
-                if(!users){
-                    api.openWin({
-                        name: 'xiangxi',
-                        url: 'login_frame.html',
-                        pageParam: {
-                            name: 'test'
-                        }
-                    });
-                }else{
-                    api.openWin({
-                        name: 'xiangxi',
-                        url: 'person_info_frame.html',
-                        pageParam: {
-                            name: 'test'
-                        }
-                    });
-                }
-            });
 
         };
 
-        var userAvatar, userAccount, userRegion,userName;
+        var users,userAvatar,userRegion,userAccount,userName;
 
+        $(document).on('click','.person_info',function(){
+            users = $api.getStorage("users")
+            api.openWin({
+                name: 'person_info',
+                url: 'person_info.html',
+                pageParam: {
+                    name: 'test'
+                }
+            });
+
+        });
         function fnInit() {
             userAvatar = $api.byId('userAvatar');
             userAccount = $api.byId('userAccount');
             userRegion = $api.byId('userRegion');
             userName = $api.byId('userName');
-
-            if(!users){
-             api.openWin({
-                    name: 'xiangxi',
-		            url: 'login_frame.html',
-		            pageParam: {           
-		                name: 'test'
-		            }
-              });
-            
-            }else{
-            fnUpdateUserInfo();
-            }
+            fnUpdateUserInfo()
         };
 
         function fnInitEvent() {
@@ -257,6 +228,7 @@
         };
 
         function fnUpdateUserInfo() {
+            console.log(JSON.stringify(users))
             userName.innerHTML = users.username || '点击登陆';
             var src = $api.getStorage('avatar') || '../image/my/profile_default.png';
             api.imageCache({

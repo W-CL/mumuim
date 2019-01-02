@@ -62,10 +62,20 @@
     <script type="text/javascript" src="../script/common.js"></script>
     <script type="text/javascript">
         apiready = function() {
-            $api.byId('searchText').innerHTML = api.pageParam.keyword + '...';
+
+           $api.byId('searchText').innerHTML = api.pageParam.keyword ;
+            // api.openWin({
+            //     name: 'search_result_frame',
+            //     url: 'search_result_frame.html',
+            //     pageParam: {
+            //         keyword:key,
+            //
+            //     }
+            // });
 
             fnReady();
             fnReadyFrame();
+
         };
     </script>
 

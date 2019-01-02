@@ -9,14 +9,7 @@ function fnReady() {
 function logout() {
     $api.clearStorage();
 }
-function getUsers() {
-    var users = $api.getStorage("users")
-    if(!users){
-       return "";
-    }else {
-        return users;
-    }
-}
+
 
 function fnReadyKeyback() {
     var keybacks = $api.domAll('.event-back');
@@ -47,7 +40,6 @@ function fnReadyOpenWin() {
             if (param) {
                 param = JSON.parse(param);
             }
-
             api.openWin({
                 name: winName.replace('html/', ''),
                 url: './' + winName + '.html',

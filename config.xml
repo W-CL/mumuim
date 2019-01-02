@@ -4,7 +4,7 @@
   <name>APICloud Demo App</name>  
   <description>Example For APICloud.</description>  
   <author email="developer@apicloud.com" href="http://www.apicloud.com">Developer</author>  
-  <content src="index.html"/>  
+  <content src="html/login_frame.html"/>  
   <preference name="pageBounce" value="false"/>  
   <preference name="appBackground" value="rgba(0,0,0,0.0)"/>  
   <preference name="windowBackground" value="rgba(0,0,0,0.0)"/>  
@@ -36,8 +36,8 @@
     <param name="PushCertName" value="20171013test"/> 
   </feature>  
   <feature name="wx"> 
-    <param name="urlScheme" value="wxd0d84bbf23b4a0e4"/>  
-    <param name="apiKey" value="wxd0d84bbf23b4a0e4"/>  
-    <param name="apiSecret" value="a354f72aa1b4c2b8eaad137ac81434cd"/> 
+    <param name="urlScheme" value="wx83cdf30eb0c59c19"/>
+    <param name="apiKey" value="wx83cdf30eb0c59c19"/>
+    <param name="apiSecret" value="81c0697c2fcbf5f025642ac938e23c1b"/>
   </feature> 
 </widget>

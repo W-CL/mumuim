@@ -189,6 +189,8 @@
     <script type="text/javascript" src="../script/api.js"></script>
     <script type="text/javascript" src="../script/SHA1.js"></script>
     <script type="text/javascript" src="../script/remotedb.js"></script>
+    <script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+
     <script type="text/javascript">
         apiready = function() {
         //从服务器获取appid和appsecret
@@ -278,7 +280,6 @@
 				}
 			});
 		}
-		
 		//调用接口获取用户信息
 		function getInformation(wx,accessToken,openId){
 			wx.getUserInfo({
@@ -301,10 +302,8 @@
 			    }
 			});
 		}
-		
-		
 
-        
+
         function fnLogin(){
          api.ajax({
 	         url:'http://www1.msc8i8.cn/index/phone/request',
@@ -331,14 +330,29 @@
 
                        $api.setStorage("friends",ret.data.friends);
                        $api.setStorage("rooms",ret.data.rooms);
-                       
-                       api.openWin({
-                            name: 'xiangxi',
-        		            url: 'my_frame.html',
-        		            pageParam: {           
+                         // api.historyBack({
+                         //     frameName: 'detail'
+                         // }, function(ret, err) {
+                         //     if (!ret.status) {
+                         //         api.closeWin();
+                         //     }
+                         // });
+                     api.openWin({
+                            name: 'index',
+        		            url: '../index.html',
+        		            pageParam: {
         		                name: 'test'
         		            }
                       });
+                     // api.sendEvent({
+                     //     name: 'myInfo',
+                     //     extra: {
+                     //         username: users.username,
+                     //         photo: users.photo,
+                     //         city: users.city,
+                     //     }
+                     // });
+                    // api.closeWin();
                 }
              }else{
                  api.toast({
@@ -351,10 +365,7 @@
          });
         }
 
-        //被register_frame.html调用
-        function fnSetEmail(email) {
-            $api.byId('email').value = email;
-        };
+
     </script>
 
 </html>

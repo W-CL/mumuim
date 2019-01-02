@@ -168,8 +168,8 @@
             users = $api.getStorage("users");
             if(!users){
                 api.openWin({
-                    name: 'xiangxi',
-                    url: 'login_frame.html',
+                    name: 'login',
+                    url: 'login.html',
                     pageParam: {
                         name: 'test'
                     }
@@ -329,16 +329,21 @@
 
         function fnLogout() {
             logout();
-            api.sendEvent({
-                name: 'logout'
-            });
+            // api.sendEvent({
+            //     name: 'logout'
+            // });
 
             api.alert({
                 title: '注销',
                 msg: '已退出当前账号'
             });
-
-            api.closeWin();
+            api.openWin({
+                name: 'login',
+                url: 'login_frame.html',
+                pageParam: {
+                    name: 'test'
+                }
+            });
         };
     </script>
 
