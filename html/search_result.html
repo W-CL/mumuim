@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="../css/api.css" />
         <style>
             header {
-                background-color: #fcfcfc;
+                background-color: #5b98fc;
                 border-bottom: solid #dddfe3 1px;
                 height: 50px;
             }
@@ -23,38 +23,14 @@
                 background-size: 15px auto;
             }
             
-            .search {
-                height: 34px;
-                border-radius: 30px;
-                position: absolute;
-                bottom: 8px;
-                left: 40px;
-                right: 15px;
-                background-color: #E8E8E8;
-            }
-            
-            .search>img {
-                padding-top: 7px;
-                height: 20px;
-                vertical-align: top;
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-            
-            .search>span {
-                padding-top: 10px;
-                font-size: 14px;
-                color: #666;
-            }
+
         </style>
     </head>
 
     <body>
         <header id="header">
             <div class="back event-back"></div>
-            <div class="search">
-                <img src="../image/header/search_groupbuy.png">
-                <span id="searchText">搜索内容</span>
+            <span align="center" style="color:#0e080b; padding-left:150px;">朋友</span>
             </div>
         </header>
     </body>
@@ -62,21 +38,33 @@
     <script type="text/javascript" src="../script/common.js"></script>
     <script type="text/javascript">
         apiready = function() {
-
-           $api.byId('searchText').innerHTML = api.pageParam.keyword ;
-            // api.openWin({
-            //     name: 'search_result_frame',
-            //     url: 'search_result_frame.html',
-            //     pageParam: {
-            //         keyword:key,
-            //
-            //     }
-            // });
-
+           //$api.byId('searchText').value = api.pageParam.keyword ;
             fnReady();
             fnReadyFrame();
-
         };
+        // function fnSearch() {
+        //     var key = $api.byId('searchText').value;
+        //     api.openFrame({
+        //         name: 'search_result',
+        //         url:  'search_result_frame.html',
+        //         rect: {
+        //             x:0,
+        //             y:0,
+        //             w:'auto',
+        //             h:'auto',
+        //             marginTop:'40',    //相对父 window 上外边距的距离
+        //             marginBottom:'0',    //相对父 window 下外边距的距离
+        //         },
+        //         bounces:true,
+        //         progress:{
+        //             type:"default",
+        //         },
+        //         pageParam: {
+        //             keyword:key,
+        //         }
+        //     });
+        // }
+        
     </script>
 
 </html>

@@ -317,6 +317,10 @@
     <!--<script type="text/javascript" src="../script/list.js"></script>-->
     <script type="text/javascript">
         apiready = function() {
+            inputSearch();
+        };
+
+        function inputSearch() {
             var users=$api.getStorage("users")
             var key = api.pageParam.keyword;
             var pidkey = users.id+"_pid";
@@ -372,7 +376,8 @@
                     }
                 });
             }
-        };
+
+        }
     </script>
 
 </html>
