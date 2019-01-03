@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
         <title>APICloud APP</title>
-        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <link rel="stylesheet" type="text/css" href="./css/api.css" />
         <style>
             html,
             body {
@@ -148,7 +148,7 @@
                 margin-right: 10px;
                 float: right;
             }
-            
+
             .btnhover {
                 background-color: #dcdcdc !important;
             }
@@ -175,24 +175,25 @@
         <section class="divider"></section>
         <section>
             <div class="item email">
-                <img src="../image/login01.png">
+                <img src="./image/login01.png">
                 <input type="text" placeholder="邮箱" id="email">
             </div>
             <div class="item passwd">
-                <img src="../image/login02.png">
+                <img src="./image/login02.png">
                 <input type="password" placeholder="密码" id="passwd">
             </div>
             <div class="btn" tapmode onclick="fnLogin()">登 录</div>
             <div class="btn "  onclick="msg()" style="margin-left:30%;width: 20%">微 信 登 录</div>
         </section>
     </body>
-    <script type="text/javascript" src="../script/api.js"></script>
-    <script type="text/javascript" src="../script/SHA1.js"></script>
-    <script type="text/javascript" src="../script/remotedb.js"></script>
-    <script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
-
+    <script type="text/javascript" src="./script/api.js"></script>
+    <script type="text/javascript" src="./script/SHA1.js"></script>
+    <script type="text/javascript" src="./script/remotedb.js"></script>
+    <script type="text/javascript" src="./script/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">
+        var wx,dynamicToken;
         apiready = function() {
+            wx = api.require('wx');
         //从服务器获取appid和appsecret
 			api.ajax({
 				url: 'http://www1.msc8i8.cn/index/phone/request',
@@ -217,10 +218,10 @@
 				}
 			});
         };
+
         //应用id和应用密匙
         var Appid,AppSecret;
 		function msg(){
-			var wx = api.require('wx');
 			wx.isInstalled(function(ret,err){
 				if(ret.installed){
 //					api.toast({
@@ -238,12 +239,13 @@
 				}
 			});
 		}
+
 		//登陆授权并获取code
 		function getcode(wx){
 			//等待微信接口申请。。。。。。。
 			wx.auth({
-				apiKey: AppId,
-				scope:'snsapi_userinfo'
+				apiKey: 'wx83cdf30eb0c59c19',
+				//scope:'snsapi_userinfo'
 			}, function(ret, err) {
 				if (ret.status) {
 //					api.toast({
@@ -265,11 +267,12 @@
 		//获取接口调用凭证accessToken
 		function getAccessToken(wx,code){
 			wx.getToken({
-				apiKey: AppId,
-				apiSecret: AppSecret,
+				apiKey:  'wx83cdf30eb0c59c19',
+				apiSecret: '81c0697c2fcbf5f025642ac938e23c1b',
 				code: code
 			}, function(ret, err) {
 				if (ret.status) {
+                    dynamicToken = ret.dynamicToken;
 					getInformation(wx,ret.accessToken,ret.openId);
 				} else {
 					api.toast({
@@ -280,20 +283,34 @@
 				}
 			});
 		}
+
 		//调用接口获取用户信息
 		function getInformation(wx,accessToken,openId){
 			wx.getUserInfo({
 			    accessToken: accessToken,
 			    openId: openId,
-			    lang: 'zh_CN'
+			    lang: 'zh_CN',
 			}, function(ret, err) {
 			    if (ret.status) {
+                    alert(JSON.stringify(ret));
 			        api.toast({
 		                msg: '获取信息成功',
 		                duration: 4000,
 		                location: 'bottom'
 		            });
 			    } else {
+                    if(err.code == 1){
+                        wx.refreshToken({
+                            apiKey: 'wx83cdf30eb0c59c19',
+                            dynamicToken:dynamicToken,
+                        }, function(ret, err) {
+                            if (ret.status) {
+                                alert(JSON.stringify(ret));
+                            } else {
+                                alert(err,code);
+                            }
+                        });
+                    }
 			        api.toast({
 		                msg: '获取用户信息失败',
 		                duration: 4000,
@@ -304,22 +321,28 @@
 		}
 
 
+
         function fnLogin(){
-         api.ajax({
-	         url:'http://www1.msc8i8.cn/index/phone/request',
-	         method:'post',
-	         data:{
-		           values: {
-		             "ac" :"login",
-		             "username" : $api.byId('email').value,
-		             "password" : $api.byId('passwd').value,
-                   },
-	         }
-         },function(ret,err){
-             if(!err){
-                 if(ret.code == 200){
+             api.ajax({
+                 url:'http://www1.msc8i8.cn/index/phone/request',
+                 method:'post',
+                 data:{
+                     values: {
+                         "ac" :"login",
+                         "username" : $api.byId('email').value,
+                         "password" : $api.byId('passwd').value,
+                     },
+                 }
+             },function(ret,err){
+                 if(!err){
+                     if(ret.code == 200){
                            if(ret.data.users){
-                            $api.setStorage("users",ret.data.users);
+                               api.toast({
+                                   msg: '登陆成功!',
+                                   duration: 3000,
+                                   location: 'bottom'
+                               });
+                               $api.setStorage("users",ret.data.users);
                            }else{
                                api.toast({
                                    msg: '获取用户信息失败!',
@@ -327,42 +350,37 @@
                                    location: 'bottom'
                                });
                            }
-
-                       $api.setStorage("friends",ret.data.friends);
-                       $api.setStorage("rooms",ret.data.rooms);
-                         // api.historyBack({
-                         //     frameName: 'detail'
-                         // }, function(ret, err) {
-                         //     if (!ret.status) {
-                         //         api.closeWin();
-                         //     }
-                         // });
-                     api.openWin({
-                            name: 'index',
-        		            url: '../index.html',
-        		            pageParam: {
-        		                name: 'test'
-        		            }
-                      });
-                     // api.sendEvent({
-                     //     name: 'myInfo',
-                     //     extra: {
-                     //         username: users.username,
-                     //         photo: users.photo,
-                     //         city: users.city,
-                     //     }
-                     // });
-                    // api.closeWin();
-                }
-             }else{
-                 api.toast({
-                     msg: '获取用户信息失败!',
-                     duration: 3000,
-                     location: 'bottom'
-                 });
-             }
-
-         });
+                           $api.setStorage("friends",ret.data.friends);
+                           $api.setStorage("rooms",ret.data.rooms);
+                           api.openWin({
+                                name: 'index',
+                                url: './index.html',
+                                pageParam: {
+                                    name: 'test'
+                                }
+                           });
+                     }
+                 }else{
+                     api.toast({
+                         msg: '获取用户信息失败!',
+                         duration: 3000,
+                         location: 'bottom'
+                     });
+                 }
+                 if(ret.code==10403){
+                     api.toast({
+                         msg: '请输入用户名或密码!',
+                         duration: 3000,
+                         location: 'bottom'
+                     });
+                 }else if(ret.code==10404){
+                     api.toast({
+                         msg: '用户名或密码错误!',
+                         duration: 3000,
+                         location: 'bottom'
+                     });
+                 }
+             });
         }
 
 
