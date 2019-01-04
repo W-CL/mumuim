@@ -180,9 +180,6 @@
                 fnInitEvent();
                 fnSetInfo();
             }
-
-
-
         };
 
         var avatar, city, gender, birthday;
@@ -204,9 +201,8 @@
 
         function fnSetInfo() {
             avatar.style.backgroundImage = 'url(' + users.photo+ ')' || 'url(../image/my/profile_default.png)';
-//{"id":1024,"uc_uid":0,"tb_uid":0,"username":"qweqwe","email":"","gender":0,"intro":"","byear":0,"bmonth":0,"bday":0,"province":"","city":"北京","score":0,"score_level":0,"qq":"","address":"","realname":"","mobile":"","reg_ip":"192.168.1.105","reg_time":1545887177,"last_time":1545887177,"sign_time":1545887177,"last_ip":"","login_count":2,"status":1,"tuisong":1,"money":"0.00","weixin":"","photo":"","online":0,"auto_add":0,"tuijian_id":0}
             city.innerHTML     = users.city || '';
-            gender.innerHTML   = users.gender || '';
+            gender.innerHTML   = users.gender==1 ?"男":"女" ;
             api.sendEvent({
                 name: 'setuserinfo'
             });
@@ -253,9 +249,7 @@
                 if (ret.buttonIndex == 3) {
                     return;
                 }
-
                 var sourceType = (ret.buttonIndex == 1) ? 'camera' : 'album';
-
                 api.getPicture({
                     sourceType: sourceType,
                     allowEdit: true,
@@ -339,7 +333,7 @@
             });
             api.openWin({
                 name: 'login',
-                url: 'login_frame.html',
+                url: '../login_frame.html',
                 pageParam: {
                     name: 'test'
                 }

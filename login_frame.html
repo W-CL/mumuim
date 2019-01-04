@@ -194,41 +194,21 @@
         var wx,dynamicToken;
         apiready = function() {
             wx = api.require('wx');
-        //从服务器获取appid和appsecret
-			api.ajax({
-				url: 'http://www1.msc8i8.cn/index/phone/request',
-				method:'post',
-				timeout: 5,
-				dataType: 'json',
-				returnAll: false,
-				headers: 'application/json',
-				data:{
-				 	body: '{"ac":"getAppInformation","secret":"qweqwe"}'
-				}
-			}, function(ret, err) {
-				if(ret.msg==0){
-					AppId = ret.data.appid;
-					AppSecret = ret.data.appsecret;
-				}else{
-					api.toast({
-                        msg: ret.param,
-                        duration: 2000,
-                        location: 'bottom'
-                    });
-				}
-			});
-        };
+            var users =    $api.getStorage("users");
+            if(users){
+                api.openWin({
+                    name: 'index',
+                    url: 'index.html',
+                    pageParam: {
+                        name: 'test'
+                    }
+                });
+             }
 
-        //应用id和应用密匙
-        var Appid,AppSecret;
+        };
 		function msg(){
 			wx.isInstalled(function(ret,err){
 				if(ret.installed){
-//					api.toast({
-//                      msg: '正在跳转，请稍等',
-//                      duration: 3000,
-//                      location: 'bottom'
-//                  });
                 	getcode(wx);
 				}else{
 					api.toast({
@@ -242,35 +222,34 @@
 
 		//登陆授权并获取code
 		function getcode(wx){
-			//等待微信接口申请。。。。。。。
-			wx.auth({
-				apiKey: 'wx83cdf30eb0c59c19',
-				//scope:'snsapi_userinfo'
-			}, function(ret, err) {
-				if (ret.status) {
-//					api.toast({
-//						msg: ret.status+'-'+ret.code,
-//		                duration: 4000,
-//		                location: 'bottom'
-//		           	});
-		           	getAccessToken(wx,ret.code);
-				} else {
-					api.toast({
-		                msg: '获取code失败',
-		                duration: 4000,
-		                location: 'bottom'
-		            });
-				}
-			});
+
+             //等待微信接口申请。。。。。。。
+             wx.auth({
+                 apiKey: 'wx83cdf30eb0c59c19',
+             }, function(ret, err) {
+                 if (ret.status) {
+                     getAccessToken(wx,ret.code);
+                 } else {
+                     api.toast({
+                         msg: '获取code失败',
+                         duration: 4000,
+                         location: 'bottom'
+                     });
+                 }
+             });
+
+
 		}
 		
 		//获取接口调用凭证accessToken
 		function getAccessToken(wx,code){
+
 			wx.getToken({
 				apiKey:  'wx83cdf30eb0c59c19',
 				apiSecret: '81c0697c2fcbf5f025642ac938e23c1b',
 				code: code
 			}, function(ret, err) {
+
 				if (ret.status) {
                     dynamicToken = ret.dynamicToken;
 					getInformation(wx,ret.accessToken,ret.openId);
@@ -291,28 +270,69 @@
 			    openId: openId,
 			    lang: 'zh_CN',
 			}, function(ret, err) {
+                if(err.code == 1){
+                    wx.refreshToken({
+                        apiKey: 'wx83cdf30eb0c59c19',
+                        dynamicToken:dynamicToken,
+                    }, function(ret, err) {
+                        if (ret.status) {
+                            accessToken=ret.accessToken;
+                            getInformation(wx,ret.accessToken,openId);
+                        } else {
+
+                        }
+                    });
+                }
 			    if (ret.status) {
-                    alert(JSON.stringify(ret));
-			        api.toast({
-		                msg: '获取信息成功',
-		                duration: 4000,
-		                location: 'bottom'
-		            });
-			    } else {
-                    if(err.code == 1){
-                        wx.refreshToken({
-                            apiKey: 'wx83cdf30eb0c59c19',
-                            dynamicToken:dynamicToken,
-                        }, function(ret, err) {
-                            if (ret.status) {
-                                alert(JSON.stringify(ret));
-                            } else {
-                                alert(err,code);
+                    api.ajax({
+                        url:'http://www1.msc8i8.cn/index/phone/request',
+                        method:'post',
+                        data:{
+                            values: {
+                                "ac" :"weixinLogin",
+                                "tuijian" : 0,
+                                "province" : ret.province,
+                                "city" : ret.city,
+                                "unionid" : ret.unionid,
+                                "photo" : ret.headimgurl,
+                                "nickname" : ret.nickname,
+                                "sex" : ret.sex,
+
+                            },
+                        }
+                    },function(ret,err){
+                        if(!err){
+                            if(ret.code == 200){
+                                $api.setStorage("users",ret.data.users);
+                                $api.setStorage("friends",ret.data.friends);
+                                $api.setStorage("rooms",ret.data.rooms);
+                                api.openWin({
+                                    name: 'index',
+                                    url: 'index.html',
+                                    pageParam: {
+                                        name: 'test'
+                                    }
+                                });
+                            }else{
+                                api.toast({
+                                    msg: ret.msg,
+                                    duration: ret.code,
+                                    location: 'bottom'
+                                });
                             }
-                        });
-                    }
+                        }else{
+                            api.toast({
+                                msg: '网络异常!',
+                                duration: 3000,
+                                location: 'bottom'
+                            });
+                        }
+
+                    });
+
+			    } else {
 			        api.toast({
-		                msg: '获取用户信息失败',
+		                msg: '网络异常',
 		                duration: 4000,
 		                location: 'bottom'
 		            });
@@ -354,7 +374,7 @@
                            $api.setStorage("rooms",ret.data.rooms);
                            api.openWin({
                                 name: 'index',
-                                url: './index.html',
+                                url: 'index.html',
                                 pageParam: {
                                     name: 'test'
                                 }
