@@ -5,63 +5,428 @@
         <meta charset="utf-8">
         <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
         <title>APICloud APP</title>
-        <link rel="stylesheet" type="text/css" href="./css/api.css" />
+        <link rel="stylesheet" type="text/css" href="css/api.css" />
+		
         <style>
-            header {
-                background-color: #fcfcfc;
-                border-bottom: solid #dddfe3 1px;
+            html,
+            body {
+                height: 100%;
+
+				background-image: linear-gradient(160deg, #ededed 20%,#cfcfcf 80%);
             }
             
-            h1 {
+            input {
                 height: 50px;
-                line-height: 50px;
-                color: rgb(38, 38, 38);
-                font-size: 20px;
-                text-align: center;
+                width: 80%;
+                font-size: 15px;
+                color: #666666;
             }
             
-            .back {
+            input::-webkit-input-placeholder {
+                color: #ccc;
+            }
+            
+            .divider {
+                height: 15px
+            }
+            
+            .email,
+            .passwd {
+            }
+            
+            .passwd img,
+            .email img {
+                vertical-align: top;
+            }
+            
+            .item {
+	position: relative;
+	border-bottom-width: 0.5px;
+	border-bottom-style: solid;
+	border-bottom-color: #DEDEDE;
+            }
+            
+            .btn {
+                margin: 3px 10px;
+                background: #ff6836;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                font-size: 20px;
+                margin-top: 20px;
+                border-radius: 5px;
+                color: #fff;
+            }
+            
+            .email img {
+                width: 25px;
+                margin-top: 15px;
+                margin-left: 10px;
+                margin-right: 9px;
+            }
+            
+            .passwd img {
+                height: 25px;
+                margin-top: 10px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+            
+            .bottom {
                 position: absolute;
                 left: 0px;
                 bottom: 0px;
-                width: 50px;
-                height: 50px;
-                background: url(./image/header/back.png) center center no-repeat;
-                background-size: 15px auto;
-            }
-            
-            .reg {
-                position: absolute;
-                right: 0px;
-                bottom: 0px;
-                width: 60px;
-                height: 50px;
-                line-height: 50px;
-                color: #FF8400;
-                font-size: 14px;
+                width: 100%;
                 text-align: center;
+                font-size: 12px;
             }
             
-            .reg-hov {
-                color: #DD8400;
+            .bottom img {
+                height: 50px;
             }
+            
+            .bottom .arrow {
+                text-align: center;
+                margin: 10px 0;
+            }
+            
+            .bottom .arrow img {
+                width: 40px;
+                height: 20px;
+            }
+            
+            #qqpic {
+                margin-right: 10px;
+                margin-left: 10px;
+            }
+            
+            .thirdinfo {
+                color: #666;
+                margin-top: 10px;
+            }
+            
+            .thirdcompy .left {
+                margin-right: 20px;
+            }
+            
+            .thirdcompy .left,
+            .thirdcompy .right {
+                width: 40%;
+                display: inline-block;
+                background: #fff;
+                border: 1px solid #ededed;
+                border-radius: 4px;
+                vertical-align: top;
+                text-align: left;
+                font-size: 18px;
+            }
+            
+            .thirdcompy .left img,
+            .thirdcompy .right img {
+                width: 30px;
+                height: 30px;
+                float: left;
+                margin: 5px 10px;
+            }
+            
+            .thirdcompy span {
+                line-height: 40px;
+                color: #666;
+            }
+            
+            .loginmore {
+                margin-top: 10px;
+            }
+            
+            .loginmore span {
+                color: #0078ff;
+            }
+            
+            .loginmore .forget {
+                margin-left: 10px;
+            }
+            
+            .loginmore .phone {
+                margin-right: 10px;
+                float: right;
+            }
+            
+            .btnhover {
+                background-color: #dcdcdc !important;
+            }
+            
+            .buyhover {
+                background-color: rgba(252, 85, 0, 0.6) !important;
+            }
+            
+            .presshover {
+                background-color: #FAFAFA !important;
+     }
+
+            .txthover {
+                color: rgba(0, 120, 255, 0.6) !important;
+            }
+
+            input {
+                outline: none;
+            }
+.box1{
+
+width:120px;
+
+height:120px;
+
+margin: 20px auto;
+
+border: 2px solid #oooooo;
+
+text-align: center;
+
+line-height: 120px;
+
+font-weight: bold;
+
+font-size: 24px;
+
+background: burlywood;
+
+border-radius: 50%;//圆角百分比
+
+}
         </style>
     </head>
 
     <body>
-        <header id="header">
-            <div class="back event-back"></div>
-            <h1>简单赚</h1>
-            <div class="reg open-win" win="register">注册</div>
-        </header>
+	
+	<div align="center" style=" padding-top:60px;">
+    <div class="box1">头像</div></div>
+        <section class="divider"></section>
+        <section>
+            <div class="item email">
+                <img src="image/login01.png">
+                <input type="text" placeholder="手机号码" id="email">
+            </div>
+            <div class="item passwd">
+                <img src="image/login02.png">
+                <input type="password" placeholder="验证码" id="passwd">
+            </div>
+            <div class="btn" tapmode onClick="fnLogin()">登 录</div>
+        </section>
+			<div style="padding:50px;" align="center">
+	  <p><img onClick="WeiXinmsg()" src="image/weixin1.png" width="66" height="66"></p>
+	  <p><font>微信登陆</font></p>
+	</div>
     </body>
-    <script type="text/javascript" src="./script/api.js"></script>
-    <script type="text/javascript" src="./script/common.js"></script>
+	
+    <script type="text/javascript" src="script/api.js"></script>
+    <script type="text/javascript" src="script/SHA1.js"></script>
+    <script type="text/javascript" src="script/remotedb.js"></script>
+    <script type="text/javascript" src="script/jquery-1.8.3.min.js"></script>
+	
     <script type="text/javascript">
+        var wx,dynamicToken;
         apiready = function() {
-            fnReady();
-            fnReadyFrame();
+		     
+
+        UIChatBox = api.require('UIChatBox');
+        api.setStatusBarStyle({
+            color: '#ededed'
+        });
+		api.setStatusBarStyle({
+            style: 'dark'
+			
+        });
+		
+            wx = api.require('wx');
+            var users = $api.getStorage("users");
+            if(users){
+                api.openWin({
+                    name: 'index',
+                    url: 'index.html',
+                    pageParam: {
+                        name: 'test'
+                    }
+                });
+            }
+
         };
+        //微信登陆
+		function WeiXinmsg(){
+			wx.isInstalled(function(ret,err){
+				if(ret.installed){
+                	getcode(wx);
+				}else{
+					api.toast({
+                        msg: '请先安装，并登陆微信',
+                        duration: 2000,
+                        location: 'bottom'
+                    });
+				}
+			});
+		}
+
+		//登陆授权并获取code
+		function getcode(wx){
+             //等待微信接口申请。。。。。。。
+             wx.auth({
+                 apiKey: 'wx83cdf30eb0c59c19',
+             }, function(ret, err) {
+                 if (ret.status) {
+                     getAccessToken(wx,ret.code);
+                 } else {
+                     api.toast({
+                         msg: '获取code失败',
+                         duration: 4000,
+                         location: 'bottom'
+                     });
+                 }
+             });
+		}
+		
+		//获取接口调用凭证accessToken
+		function getAccessToken(wx,code){
+			wx.getToken({
+				apiKey:  'wx83cdf30eb0c59c19',
+				apiSecret: '81c0697c2fcbf5f025642ac938e23c1b',
+				code: code
+			}, function(ret, err) {
+
+				if (ret.status) {
+                    dynamicToken = ret.dynamicToken;
+					getInformation(wx,ret.accessToken,ret.openId);
+				} else {
+					api.toast({
+		                msg: '获取accessToken失败',
+		                duration: 4000,
+		                location: 'bottom'
+		            });
+				}
+			});
+		}
+
+		//调用接口获取用户信息
+		function getInformation(wx,accessToken,openId){
+			wx.getUserInfo({
+			    accessToken: accessToken,
+			    openId: openId,
+			    lang: 'zh_CN',
+			}, function(ret, err) {
+                if(err.code == 1){
+                    wx.refreshToken({
+                        apiKey: 'wx83cdf30eb0c59c19',
+                        dynamicToken:dynamicToken,
+                    }, function(ret, err) {
+                        if (ret.status) {
+                            getInformation(wx,ret.accessToken,openId);
+                        } else {
+
+                        }
+                    });
+                }
+			    if (ret.status) {
+                    api.ajax({
+                        url:'http://www1.msc8i8.cn/index/phone/request',
+                        method:'post',
+                        data:{
+                            values: {
+                                "ac" :"weixinLogin",
+                                "tuijian" : 0,
+                                "province" : ret.province,
+                                "city" : ret.city,
+                                "unionid" : ret.unionid,
+                                "photo" : ret.headimgurl,
+                                "nickname" : ret.nickname,
+                                "sex" : ret.sex,
+                            },
+                        }
+                    },function(ret,err){
+                        if(!err){
+                            if(ret.code == 200){
+                                $api.setStorage("users",ret.data.users);
+                                $api.setStorage("friends",ret.data.friends);
+                                $api.setStorage("rooms",ret.data.rooms);
+                                api.openWin({
+                                    name: 'index',
+                                    url: 'index.html',
+                                    pageParam: {
+                                        name: 'test'
+                                    }
+                                });
+                            }else{
+                                api.toast({
+                                    msg: ret.msg,
+                                    duration: ret.code,
+                                    location: 'bottom'
+                                });
+                            }
+                        }else{
+                            api.toast({
+                                msg: '网络异常!',
+                                duration: 3000,
+                                location: 'bottom'
+                            });
+                        }
+                    });
+			    } else {
+			        api.toast({
+		                msg: '网络异常',
+		                duration: 4000,
+		                location: 'bottom'
+		            });
+			    }
+			});
+		}
+
+		//登陆
+        function fnLogin(){
+             api.ajax({
+                 url:'http://www1.msc8i8.cn/index/phone/request',
+                 method:'post',
+                 data:{
+                     values: {
+                         "ac" :"login",
+                         "username" : $api.byId('email').value,
+                         "password" : $api.byId('passwd').value,
+                     },
+                 }
+             },function(ret,err){
+                 if(!err){
+                     if(ret.code == 200){
+                           if(ret.data.users){
+                               api.toast({
+                                   msg: '登陆成功!',
+                                   duration: 3000,
+                                   location: 'bottom'
+                               });
+                               $api.setStorage("users",ret.data.users);
+                           }else{
+                               api.toast({
+                                   msg: '获取用户信息失败!',
+                                   duration: 3000,
+                                   location: 'bottom'
+                               });
+                           }
+                           $api.setStorage("friends",ret.data.friends);
+                           $api.setStorage("rooms",ret.data.rooms);
+                           api.openWin({
+                                name: 'index',
+                                url: 'index.html',
+                                pageParam: {
+                                    name: 'test'
+                                }
+                           });
+                     }
+                 }else{
+                     api.toast({
+                         msg: '获取用户信息失败!',
+                         duration: 3000,
+                         location: 'bottom'
+                     });
+                 }
+             });
+        }
+
+
     </script>
 
 </html>

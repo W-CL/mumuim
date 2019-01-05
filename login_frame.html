@@ -5,19 +5,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
         <title>APICloud APP</title>
-        <link rel="stylesheet" type="text/css" href="./css/api.css" />
+        <link rel="stylesheet" type="text/css" href="css/api.css" />
+		
         <style>
             html,
             body {
                 height: 100%;
-                background-color: #f0f0f0;
+
+				background-image: linear-gradient(160deg, #ededed 20%,#cfcfcf 80%);
             }
             
             input {
                 height: 50px;
                 width: 80%;
-                font-size: 18px;
-                color: #8E8C8C;
+                font-size: 15px;
+                color: #666666;
             }
             
             input::-webkit-input-placeholder {
@@ -30,7 +32,6 @@
             
             .email,
             .passwd {
-                background: #fff;
             }
             
             .passwd img,
@@ -39,9 +40,10 @@
             }
             
             .item {
-                background-color: #fff;
-                border-bottom: 1px solid #e0e0e0;
-                position: relative;
+	position: relative;
+	border-bottom-width: 0.5px;
+	border-bottom-style: solid;
+	border-bottom-color: #DEDEDE;
             }
             
             .btn {
@@ -112,7 +114,7 @@
                 width: 40%;
                 display: inline-block;
                 background: #fff;
-                border: 1px solid #e0e0e0;
+                border: 1px solid #ededed;
                 border-radius: 4px;
                 vertical-align: top;
                 text-align: left;
@@ -148,7 +150,7 @@
                 margin-right: 10px;
                 float: right;
             }
-
+            
             .btnhover {
                 background-color: #dcdcdc !important;
             }
@@ -168,33 +170,71 @@
             input {
                 outline: none;
             }
+.box1{
+
+width:120px;
+
+height:120px;
+
+margin: 20px auto;
+
+border: 2px solid #oooooo;
+
+text-align: center;
+
+line-height: 120px;
+
+font-weight: bold;
+
+font-size: 24px;
+
+background: burlywood;
+
+border-radius: 50%;//圆角百分比
+
+}
         </style>
     </head>
 
     <body>
+	
+	<div align="center" style=" padding-top:60px;">
+    <div class="box1">头像</div></div>
         <section class="divider"></section>
         <section>
             <div class="item email">
-                <img src="./image/login01.png">
-                <input type="text" placeholder="邮箱" id="email">
+                <img src="image/login01.png">
+                <input type="text" placeholder="手机号码" id="email">
             </div>
             <div class="item passwd">
-                <img src="./image/login02.png">
-                <input type="password" placeholder="密码" id="passwd">
+                <img src="image/login02.png">
+                <input type="password" placeholder="验证码" id="passwd">
             </div>
-            <div class="btn" tapmode onclick="fnLogin()">登 录</div>
-            <div class="btn "  onclick="msg()" style="margin-left:30%;width: 20%">微 信 登 录</div>
+            <div class="btn" tapmode onClick="fnLogin()">登 录</div>
         </section>
+			<div style="padding:50px;" align="center">
+	  <p><img onClick="WeiXinmsg()" src="image/weixin1.png" width="66" height="66"></p>
+	  <p><font>微信登陆</font></p>
+	</div>
     </body>
-    <script type="text/javascript" src="./script/api.js"></script>
-    <script type="text/javascript" src="./script/SHA1.js"></script>
-    <script type="text/javascript" src="./script/remotedb.js"></script>
-    <script type="text/javascript" src="./script/jquery-1.8.3.min.js"></script>
+	
+    <script type="text/javascript" src="script/api.js"></script>
+    <script type="text/javascript" src="script/SHA1.js"></script>
+    <script type="text/javascript" src="script/remotedb.js"></script>
+    <script type="text/javascript" src="script/jquery-1.8.3.min.js"></script>
+	
     <script type="text/javascript">
         var wx,dynamicToken;
         apiready = function() {
+        UIChatBox = api.require('UIChatBox');
+        api.setStatusBarStyle({
+            color: '#ededed'
+        });
+		api.setStatusBarStyle({
+            style: 'dark'
+        });
             wx = api.require('wx');
-            var users =    $api.getStorage("users");
+            var users = $api.getStorage("users");
             if(users){
                 api.openWin({
                     name: 'index',
@@ -203,10 +243,11 @@
                         name: 'test'
                     }
                 });
-             }
+            }
 
         };
-		function msg(){
+        //微信登陆
+		function WeiXinmsg(){
 			wx.isInstalled(function(ret,err){
 				if(ret.installed){
                 	getcode(wx);
@@ -222,7 +263,6 @@
 
 		//登陆授权并获取code
 		function getcode(wx){
-
              //等待微信接口申请。。。。。。。
              wx.auth({
                  apiKey: 'wx83cdf30eb0c59c19',
@@ -237,13 +277,10 @@
                      });
                  }
              });
-
-
 		}
 		
 		//获取接口调用凭证accessToken
 		function getAccessToken(wx,code){
-
 			wx.getToken({
 				apiKey:  'wx83cdf30eb0c59c19',
 				apiSecret: '81c0697c2fcbf5f025642ac938e23c1b',
@@ -276,7 +313,6 @@
                         dynamicToken:dynamicToken,
                     }, function(ret, err) {
                         if (ret.status) {
-                            accessToken=ret.accessToken;
                             getInformation(wx,ret.accessToken,openId);
                         } else {
 
@@ -297,7 +333,6 @@
                                 "photo" : ret.headimgurl,
                                 "nickname" : ret.nickname,
                                 "sex" : ret.sex,
-
                             },
                         }
                     },function(ret,err){
@@ -327,9 +362,7 @@
                                 location: 'bottom'
                             });
                         }
-
                     });
-
 			    } else {
 			        api.toast({
 		                msg: '网络异常',
@@ -340,8 +373,7 @@
 			});
 		}
 
-
-
+		//登陆
         function fnLogin(){
              api.ajax({
                  url:'http://www1.msc8i8.cn/index/phone/request',
@@ -383,19 +415,6 @@
                  }else{
                      api.toast({
                          msg: '获取用户信息失败!',
-                         duration: 3000,
-                         location: 'bottom'
-                     });
-                 }
-                 if(ret.code==10403){
-                     api.toast({
-                         msg: '请输入用户名或密码!',
-                         duration: 3000,
-                         location: 'bottom'
-                     });
-                 }else if(ret.code==10404){
-                     api.toast({
-                         msg: '用户名或密码错误!',
                          duration: 3000,
                          location: 'bottom'
                      });

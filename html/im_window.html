@@ -20,9 +20,11 @@
 		
     /*header*/		
 		
-    header {		
-        background-color: #1076c4;		
-        border-bottom: 1px solid #3b3a3f;		
+    header {
+	background-color: #ededed;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #ededed;
     }		
 		
     .header {		
@@ -44,7 +46,7 @@
         -webkit-box-flex: 1;		
         text-align: center;		
         font-size: 20px;
-		color:#FFFFFF;
+		color:#333333;
     }		
 		
     .header a, .footer a {
@@ -57,7 +59,7 @@
     }		
 		
     .back {		
-        background-image: url("../image/back.png");		
+        background-image: url(../image/cm2_icn_back.png);		
     }		
 		
     /*header*/		
@@ -77,7 +79,7 @@
     }		
 		
     .footer {		
-        background-color: #3b3a3f;		
+        background-color: #ededed;		
         position: absolute;	
         bottom: 0px;	
         width:100%;	
@@ -86,13 +88,13 @@
 </style>		
 <body>		
 <header>		
-    <div style="height:50px;" class="header">		
+    <div class="header">		
         <a class="back event-back"></a>		
 		
         <div class="title" id="title">不吃草的驴</div>		
         <a class="bell"  id="nav" onClick="openNew1()" tapmode=""></a>			
     </div>		
-</header>		
+</header>
 <div class="content">		
 		
 </div>		
@@ -102,7 +104,9 @@
 <script type="text/javascript" src="../script/api.js"></script>	
 <script type="text/javascript" src="../script/common.js"></script>	
 <script>		
-    apiready=function(){		
+    apiready=function(){
+	    fnReady();
+        fnReadyFrame();		
         var $header=$api.dom('.header');		
         $api.fixIos7Bar($header);		
         var $footer=$api.dom('.footer');		
@@ -130,6 +134,7 @@
 
 
       }	
-</script>		
+</script>	
+	
 </body>		
 </html>		

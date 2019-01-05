@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/html/xin_frame1.html" line="149" />
+    <bookmark url="file://$PROJECT_DIR$/html/xin_frame1.html" line="150" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37e71850-1004-4d1f-bb4d-80a06a868abc" name="Default Changelist" comment="" />
@@ -15,60 +15,25 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/login_frame.html">
+        <entry file="file://$PROJECT_DIR$/html/xin_frame1.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="189" column="67" lean-forward="true" selection-start-line="189" selection-start-column="67" selection-end-line="189" selection-end-column="67" />
+            <state relative-caret-position="285">
+              <caret line="146" selection-start-line="146" selection-end-line="146" />
+              <folding>
+                <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#font#0;n#td#1;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#font#1;n#td#1;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#font#0;n#strong#0;n#td#2;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/person_info.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-377" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/html/person_info_frame.html">
+        <entry file="file://$PROJECT_DIR$/html/contactslist.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="304" column="37" selection-start-line="304" selection-start-column="37" selection-end-line="304" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/my_frame.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1133">
-              <caret line="182" column="80" selection-start-line="182" selection-start-column="80" selection-end-line="182" selection-end-column="80" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/im_frame1.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-525" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-252">
-              <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2173">
-              <caret line="371" lean-forward="true" selection-start-line="371" selection-end-line="371" />
+            <state relative-caret-position="330">
+              <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -84,15 +49,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>console.log</find>
-      <find>conslon</find>
-      <find>usrname</find>
-      <find>username</find>
-      <find>st</find>
-      <find>backgroundImage</find>
-      <find>photo</find>
-      <find>num</find>
-      <find>usernames</find>
       <find>add_new_friend</find>
       <find>avatar</find>
       <find>add_friend</find>
@@ -112,16 +68,25 @@
       <find>usersname</find>
       <find>userAvatar</find>
       <find>user_name</find>
-      <find>alert</find>
       <find>userAccount</find>
+      <find>alert</find>
+      <find>fnSetAvatar</find>
+      <find>WeiXinmsg</find>
+      <find>auth</find>
+      <find>html</find>
+      <find>head</find>
+      <find>usernames</find>
+      <find>fnOpenScanner</find>
+      <find>num</find>
+      <find>UIListContacts</find>
     </findStrings>
     <replaceStrings>
       <replace />
     </replaceStrings>
     <dirStrings>
       <dir>E:\www\mumuim\script</dir>
-      <dir>E:\www\mumuim</dir>
       <dir>E:\www\mumuim\html</dir>
+      <dir>E:\www\mumuim</dir>
     </dirStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -129,16 +94,11 @@
       <list>
         <option value="$PROJECT_DIR$/html/xiangxi_window.html" />
         <option value="$PROJECT_DIR$/html/home_frame.html" />
-        <option value="$PROJECT_DIR$/html/citylist.html" />
         <option value="$PROJECT_DIR$/html/xin_window.html" />
         <option value="$PROJECT_DIR$/html/shouye_frame1.html" />
         <option value="$PROJECT_DIR$/html/find_frame.html" />
         <option value="$PROJECT_DIR$/html/friendslist.html" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/html/contactslist.html" />
         <option value="$PROJECT_DIR$/html/person_info.html" />
-        <option value="$PROJECT_DIR$/html/xin_frame1.html" />
-        <option value="$PROJECT_DIR$/config.xml" />
         <option value="$PROJECT_DIR$/html/login_frame.html" />
         <option value="$PROJECT_DIR$/script/common.js" />
         <option value="$PROJECT_DIR$/html/search.html" />
@@ -148,9 +108,15 @@
         <option value="E:/download/wx-Example-master/wx.html" />
         <option value="$PROJECT_DIR$/login.html" />
         <option value="$PROJECT_DIR$/html/wx.html" />
-        <option value="$PROJECT_DIR$/login_frame.html" />
+        <option value="$PROJECT_DIR$/res/UICityList.json" />
+        <option value="$PROJECT_DIR$/html/citylist.html" />
         <option value="$PROJECT_DIR$/html/my_frame.html" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/config.xml" />
         <option value="$PROJECT_DIR$/html/person_info_frame.html" />
+        <option value="$PROJECT_DIR$/html/xin_frame1.html" />
+        <option value="$PROJECT_DIR$/login_frame.html" />
+        <option value="$PROJECT_DIR$/html/contactslist.html" />
       </list>
     </option>
   </component>
@@ -163,11 +129,11 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="257" />
-    <option name="y" value="72" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="835" />
+    <option name="y" value="29" />
     <option name="width" value="1623" />
-    <option name="height" value="997" />
+    <option name="height" value="994" />
   </component>
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
@@ -175,7 +141,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -183,22 +148,18 @@
               <item name="星巴克" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="mumuim" type="2674bda8:ScopeViewTreeModel$GroupNode" />
             </path>
-            <path>
-              <item name="星巴克" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="mumuim" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="html" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546572723119" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546673321403" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -253,18 +214,19 @@
       <workItem from="1546131519857" duration="24851000" />
       <workItem from="1546390427004" duration="29329000" />
       <workItem from="1546477071390" duration="26798000" />
-      <workItem from="1546563703665" duration="8957000" />
+      <workItem from="1546563703665" duration="30447000" />
+      <workItem from="1546650341939" duration="10369000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="144313000" />
+    <option name="totallyTimeSpent" value="176172000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="835" y="29" width="1623" height="994" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13113007" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15930901" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -282,7 +244,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -332,56 +294,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://E:/新建文件夹/WeChat Files/wcl840832887/Files/search_frame.html" />
-    <entry file="file://$PROJECT_DIR$/html/welcome_frame_1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-225" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/welcome_frame_2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="65" column="23" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/map.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1425" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/welcome_frame_3.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="47" column="11" lean-forward="true" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/xin_window.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1924">
-          <caret line="116" column="5" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/xiangxi_window.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="925">
-          <caret line="46" column="33" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
-          <folding>
-            <element signature="n#style#0;n#div#2;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/xiangxi_frame1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2125" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/welcome_frame_4.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/tixian_window.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2025" />
@@ -408,23 +320,9 @@
     <entry file="file://$PROJECT_DIR$/html/about_frame.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/citylist.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-650">
-          <caret line="43" column="31" lean-forward="true" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/im_window.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2175" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/contactslist.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1036">
-          <caret line="44" column="18" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html/home_frame.html">
@@ -456,19 +354,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html/broadcast_msg_frame.html">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/xin_frame1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="145" column="33" lean-forward="true" selection-start-line="145" selection-start-column="33" selection-end-line="145" selection-end-column="33" />
-          <folding>
-            <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#td#1;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#1;n#td#1;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#font#0;n#strong#0;n#td#2;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/script/common.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -554,44 +439,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="40" column="67" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2173">
-          <caret line="371" lean-forward="true" selection-start-line="371" selection-end-line="371" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-252">
-          <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/wx.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3600">
-          <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/html/wx.html" />
     <entry file="file://$PROJECT_DIR$/html/im_frame1.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-525" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/login_frame.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="189" column="67" lean-forward="true" selection-start-line="189" selection-start-column="67" selection-end-line="189" selection-end-column="67" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html/person_info.html">
@@ -599,17 +450,115 @@
         <state relative-caret-position="-377" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/script/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="729">
+          <caret line="436" column="40" selection-start-line="436" selection-start-column="40" selection-end-line="436" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/UICityList.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="117" column="23" selection-start-line="117" selection-start-column="23" selection-end-line="117" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/citylist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1514">
+          <caret line="90" column="63" selection-start-line="90" selection-start-column="63" selection-end-line="90" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image/header/jia.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image/header/jia1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mumuid.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mumuim.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.filelist.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html/my_frame.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1133">
-          <caret line="182" column="80" selection-start-line="182" selection-start-column="80" selection-end-line="182" selection-end-column="80" />
+        <state relative-caret-position="325">
+          <caret line="230" column="43" lean-forward="true" selection-start-line="230" selection-start-column="43" selection-end-line="230" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html/person_info_frame.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="304" column="37" selection-start-line="304" selection-start-column="37" selection-end-line="304" selection-end-column="37" />
+        <state relative-caret-position="336">
+          <caret line="190" column="30" selection-start-line="190" selection-start-column="30" selection-end-line="190" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/xiangxi_frame1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-928" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/xiangxi_window.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-375" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="292" column="78" selection-start-line="292" selection-start-column="66" selection-end-line="292" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login_frame.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4211">
+          <caret line="387" column="33" selection-start-line="387" selection-start-column="33" selection-end-line="387" selection-end-column="33" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/xin_frame1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="146" selection-start-line="146" selection-end-line="146" />
+          <folding>
+            <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#0;n#td#1;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#1;n#td#1;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#font#0;n#strong#0;n#td#2;n#tr#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/contactslist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
         </state>
       </provider>
     </entry>

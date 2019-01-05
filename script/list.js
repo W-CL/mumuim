@@ -57,8 +57,8 @@ function fnInitPullRefresh() {
     api.setRefreshHeaderInfo({
         visible: true,
         loadingImg: 'widget://image/refresh.png',
-        bgColor: '#1076c4',
-        textColor: '#ceeaff',
+        bgColor: '#ededed',
+        textColor: '#cccccc',
         textDown: '下拉刷新...',
         textUp: '松开刷新...',
         showTime: false

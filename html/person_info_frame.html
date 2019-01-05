@@ -165,25 +165,14 @@
     <script type="text/javascript" src="../script/remotedb.js"></script>
     <script type="text/javascript">
         apiready = function() {
-            users = $api.getStorage("users");
-            if(!users){
-                api.openWin({
-                    name: 'login',
-                    url: 'login.html',
-                    pageParam: {
-                        name: 'test'
-                    }
-                });
-            }else{
                 fnReadyOpenWin();
                 fnInit();
                 fnInitEvent();
                 fnSetInfo();
-            }
+
         };
 
         var avatar, city, gender, birthday;
-
         function fnInit() {
             avatar = $api.byId('avatar');
             city = $api.byId('city');
@@ -200,6 +189,7 @@
         };
 
         function fnSetInfo() {
+            var users = $api.getStorage("users");
             avatar.style.backgroundImage = 'url(' + users.photo+ ')' || 'url(../image/my/profile_default.png)';
             city.innerHTML     = users.city || '';
             gender.innerHTML   = users.gender==1 ?"男":"女" ;
@@ -209,6 +199,7 @@
         };
 
         function fnSetBirthday() {
+            var users = $api.getStorage("users");
             api.openPicker({
                 type: 'date',
                 date: birthday.innertHTML,
@@ -228,12 +219,17 @@
                         },
                     }
                 },function(re,er){
-                  if (re.code == 200){
-                      api.toast({
+                    if (re.code == 200){
+                        users.year =  ret.year;
+                        users.month =  ret.month;
+                        users.day =  ret.day;
+                        $api.setStorage("users",users);
+                        fnSetInfo();
+                        api.toast({
                           msg: '修改用户信息成功！!',
                           duration: 3000,
                           location: 'bottom'
-                      });
+                        });
                   }
 
                 });
@@ -242,6 +238,7 @@
         };
 
         function fnSetAvatar() {
+            var users = $api.getStorage("users");
             api.actionSheet({
                 cancelTitle: '取消',
                 buttons: ['拍照', '打开相册']
@@ -258,7 +255,6 @@
                     targetHeight: 100
                 }, function(ret, err) {
                     if (ret && ret.data) {
-                        $api.setStorage('avatar', ret.data);
                         api.ajax({
                             url:'http://www1.msc8i8.cn/index/phone/request',
                             method:'post',
@@ -271,6 +267,9 @@
                             }
                         },function(re,er){
                             if (re.code == 200){
+                                users.photo =  ret.data;
+                                $api.setStorage("users",users);
+                                fnSetInfo();
                                 api.toast({
                                     msg: '修改用户信息成功！!',
                                     duration: 3000,
@@ -279,13 +278,14 @@
                             }
 
                         });
-                        fnSetInfo();
+
                     }
                 });
             });
         };
 
         function fnSetGender() {
+            var users = $api.getStorage("users");
             var buttons = ['男', '女'];
             api.actionSheet({
                 title: '请选择',
@@ -309,6 +309,9 @@
                     }
                 },function(re,er){
                     if (re.code == 200){
+                        users.gender =  ret.buttonIndex;
+                        $api.setStorage("users",users);
+                        fnSetInfo();
                         api.toast({
                             msg: '修改用户信息成功！!',
                             duration: 3000,
@@ -333,7 +336,7 @@
             });
             api.openWin({
                 name: 'login',
-                url: '../login_frame.html',
+                url: '../login.html',
                 pageParam: {
                     name: 'test'
                 }

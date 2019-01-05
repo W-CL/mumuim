@@ -8,8 +8,8 @@
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
     <style>
         header {
-            background-color: #1076c4;
-            border-bottom: solid #1076c4 1px;
+            background-color: #ededed;
+            border-bottom: solid #ededed 1px;
         }
 
         h1 {
@@ -26,7 +26,7 @@
             bottom: 0px;
             width: 50px;
             height: 50px;
-            background: url(../image/header/back.png) center center no-repeat;
+            background: url(../image/cm2_icn_back.png) center center no-repeat;
             background-size: 15px auto;
         }
     </style>
@@ -43,11 +43,8 @@
 <script type="text/javascript">
     apiready = function() {
         fnReady();
-        fnInitListContacts();
-    };
-    function fnInitListContacts() {
-        var UIListContacts = api.require('UIListContacts');
-        UIListContacts.open({
+        var UIListInformation = api.require('UIListInformation');
+        UIListInformation.open({
             rect : {
                 x : 0,
                 y : 44,
@@ -55,58 +52,31 @@
                 h : api.frameHeight - 104
             },
             contacts : [{
-                "employee_id" : 191,
-                "remark" : "王科研",
-                "phonetic" : "WangKeYang", //名字的拼音
-                "namephonetic" : "WangKeYang88",
-                "position" : "研发",
-                "dept_id" : "002000",
-                "isdeleted" : "N",
-                "tags" : "",
-                "dept_name" : "创达集团",
-                "isremark" : 1,
-                "phones" : [{
-                    "phone" : "13366148872",
-                    "type" : "1"
-                }]
+                title: '柚子移动科技',
+                subTitle: '广东深圳|互联网|2018/09/19',
+                stage:'阶段1>阶段2>阶段3>阶段4',
+                tag:'标签名称1/标签名称2',
+                price:'10000000',
+                rightImage:'widget://' ,
+                uid:1001
             }, {
-                "employee_id" : 192,
-                "remark" : "艾瑞雪",
-                "phonetic" : "WangKeYang", //名字的拼音
-                "namephonetic" : "WangKeYang88",
-                "position" : "研发",
-                "dept_id" : "002000",
-                "isdeleted" : "N",
-                "tags" : "",
-                "dept_name" : "创达集团",
-                "isremark" : 1,
-                "phones" : [{
-                    "phone" : "13366148872",
-                    "type" : "1"
-                }]
-            }, {
-                "employee_id" : 193,
-                "remark" : "秋风疾",
-                "phonetic" : "WangKeYang88", //名字的拼音
-                "namephonetic" : "WangKeYang88",
-                "position" : "研发",
-                "dept_id" : "002000",
-                "isdeleted" : "N",
-                "tags" : "",
-                "dept_name" : "创达集团",
-                "isremark" : 1,
-                "phones" : [{
-                    "phone" : "13366148872",
-                    "type" : "1"
-                }]
+                title: '柚子移动科技',
+                subTitle: '广东深圳|互联网|2018/09/19',
+                stage:'阶段1>阶段2>阶段3>阶段4',
+                tag:'标签名称1/标签名称2',
+                price:'10000000',
+                rightImage:'widget://' ,
+                uid:1002
             }],
-            fixedOn : api.frameName
+            fixedOn : api.frameName,
+            bounces:true
         }, function(ret) {
             if (ret) {
                 alert(JSON.stringify(ret));
             }
         });
     };
+
 </script>
 
 </html>

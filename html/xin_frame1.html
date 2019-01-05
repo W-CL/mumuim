@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="../css/api.css" />
   <script  type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
 <style>		
-html,body {min-height: 100%;background-color: #f3f3f3;height: 100%;}		
+html,body {min-height: 100%;background-color: #ededed;height: 100%;}		
 .fr {float: right;}		
 .fl {float: left;}		
 .mt5 {margin-top: 5px;}		
@@ -18,8 +18,8 @@ html,body {min-height: 100%;background-color: #f3f3f3;height: 100%;}
 .mt20 {margin-top: 20px;}		
 .ml5 {margin-left: 0.5em;}		
 .mr5 {margin-right: 0.5em;}		
-.hdivider {width: 100%; height: 1px;background-color: #e0e0e0;}		
-.br {border-right: 1px solid #e0e0e0;}		
+.hdivider {width: 100%; height: 1px;background-color: #ededed;}		
+.br {border-right: 1px solid #ededed;}		
 .pl10 {padding-left: 10px;}		
 /* 用flex重写框架 */		
 .egret-flex-item {		
@@ -53,16 +53,16 @@ html,body {min-height: 100%;background-color: #f3f3f3;height: 100%;}
 	display: -webkit-box;		
 	-webkit-box-flex: 1; 		
 	-webkit-flex: 1;		
-	flex: 1;border-bottom: 1px solid #e0e0e0;		
+	flex: 1;border-bottom: 1px solid #ededed;		
 	 -webkit-box-align: center;height: 4em;}		
-.isolateitem-bottom {border-bottom: 1px solid #e0e0e0; }		
+.isolateitem-bottom {border-bottom: 1px solid #ededed; }		
 /* musiclist 特殊样式 */		
 .musiclist-item {height: 4em;}		
 .musiclist-item .egret-flex-item-logo {text-align: center;font-size: 1.2em;color: #999999;}		
 .musiclist-item .egret-flex-item-shelf .egret-flex-item-shelf01 {font-size: 0.9em;}		
 .musiclist-item .egret-flex-item-arrow {max-width: 24px; min-width: 24px;}		
 .musiclist-item .egret-flex-item-arrow img {max-width: none;}		
-.isolateitem-bottom {border-bottom: 1px solid #e0e0e0; }		
+.isolateitem-bottom {border-bottom: 1px solid #ededed; }		
 		
 .allplayhover {background-color: #e2e2e2;}		
 		
@@ -144,6 +144,7 @@ html,body {min-height: 100%;background-color: #f3f3f3;height: 100%;}
   var usernames = $api.byId('usernames');
   var intro = $api.byId('intro');
   var photo = $api.byId('photo');
+
   var users = $api.getStorage("users");
   $(function(){
     $('#num').bind('input propertychange', function() {
@@ -168,6 +169,7 @@ html,body {min-height: 100%;background-color: #f3f3f3;height: 100%;}
             values: {
               "ac": "findUser",
               "username": username,
+              "nickname":username,
               "uid": users.id
             },
           }
@@ -178,46 +180,43 @@ html,body {min-height: 100%;background-color: #f3f3f3;height: 100%;}
             usernames.innerHTML = string.username || '';
             intro.innerHTML = string.intro || '此人很懒，什么都没有写';
             $(".add_new_friend").data("id",string.id)
-             photo.style.backgroundImage = 'url(' +string.photo+ ')' || 'url(../image/my/profile_default.png)'
+            photo.style.backgroundImage = 'url(' +string.photo+ ')' || 'url(../image/my/profile_default.png)'
           }
-
         });
       }
     })
   })
-apiready = function  () {
-
-
-  $(document).on('click','.add_new_friend',function(){
-    var fid = $(this).data("id")
-    var username = $("#usernames").text();
-    api.ajax({
-      url: 'http://www1.msc8i8.cn/index/phone/request',
-      method: 'post',
-      data: {
-        values: {
-          "ac": "friendly",
-          "uid": users.id,
-          "fid":fid
-        },
-      }
-    }, function (ret, err) {
-      var string = ret.data;
-      if (ret.code == 200) {
-        var key = users.id+"_"+username;
-        var tofriends = $api.getStorage(key)
-        if(tofriends){
-          tofriends.isfriend = 1;
-          $api.setStorage(key,tofriends);
+  apiready = function  () {
+    $(document).on('click','.add_new_friend',function(){
+      var fid = $(this).data("id")
+      var username = $("#usernames").text();
+      api.ajax({
+        url: 'http://www1.msc8i8.cn/index/phone/request',
+        method: 'post',
+        data: {
+          values: {
+            "ac": "friendly",
+            "uid": users.id,
+            "fid":fid
+          },
         }
-        $(".add_new_friend").css("color","#999999");
-        $(".add_new_friend").text("已添加");
-      }
+      }, function (ret, err) {
+        var string = ret.data;
+        if (ret.code == 200) {
+          var key = users.id+"_"+username;
+          var tofriends = $api.getStorage(key)
+          if(tofriends){
+            tofriends.isfriend = 1;
+            $api.setStorage(key,tofriends);
+          }
+          $(".add_new_friend").css("color","#999999");
+          $(".add_new_friend").text("已添加");
+        }
 
-    });
-  })
+      });
+    })
 
-}
+  }
 function openNew3() {
         api.openWin({
             name: 'xiangxi',
