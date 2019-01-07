@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>cityList</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        header {
+            background-color: #ededed;
+            border-bottom: solid #ededed 1px;
+        }
+
+        h1 {
+            height: 50px;
+            line-height: 50px;
+            color: #FFFFFF;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .back {
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            width: 50px;
+            height: 50px;
+            background: url(../image/cm2_icn_back.png) center center no-repeat;
+            background-size: 15px auto;
+        }
+    </style>
+</head>
+
+<body>
+<header id="header">
+    <div class="back event-back"></div>
+    <h1>好友列表</h1>
+</header>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        fnReady();
+        fnInitListContacts();
+    };
+    function fnInitListContacts() {
+        var UIListContacts = api.require('UIListContacts');
+        UIListContacts.open({
+            rect : {
+                x : 0,
+                y : 44,
+                w : api.frameWidth,
+                h : api.frameHeight - 104
+            },
+            contacts : [{
+                "employee_id" : 191,
+                "remark" : "王科研",
+                "phonetic" : "WangKeYang", //名字的拼音
+                "namephonetic" : "WangKeYang88",
+                "position" : "研发",
+                "dept_id" : "002000",
+                "isdeleted" : "N",
+                "tags" : "",
+                "dept_name" : "创达集团",
+                "isremark" : 1,
+                "phones" : [{
+                    "phone" : "13366148872",
+                    "type" : "1"
+                }]
+            }, {
+                "employee_id" : 192,
+                "remark" : "艾瑞雪",
+                "phonetic" : "WangKeYang", //名字的拼音
+                "namephonetic" : "WangKeYang88",
+                "position" : "研发",
+                "dept_id" : "002000",
+                "isdeleted" : "N",
+                "tags" : "",
+                "dept_name" : "创达集团",
+                "isremark" : 1,
+                "phones" : [{
+                    "phone" : "13366148872",
+                    "type" : "1"
+                }]
+            }, {
+                "employee_id" : 193,
+                "remark" : "秋风疾",
+                "phonetic" : "WangKeYang88", //名字的拼音
+                "namephonetic" : "WangKeYang88",
+                "position" : "研发",
+                "dept_id" : "002000",
+                "isdeleted" : "N",
+                "tags" : "",
+                "dept_name" : "创达集团",
+                "isremark" : 1,
+                "phones" : [{
+                    "phone" : "13366148872",
+                    "type" : "1"
+                }]
+            }],
+            fixedOn : api.frameName
+        }, function(ret) {
+            if (ret) {
+                alert(JSON.stringify(ret));
+            }
+        });
+    };
+</script>
+
+</html>

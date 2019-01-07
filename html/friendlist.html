@@ -6,6 +6,7 @@
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
     <title>cityList</title>
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../script/Convert_Pinyin.js" />
     <style>
         header {
             background-color: #ededed;
@@ -15,7 +16,7 @@
         h1 {
             height: 50px;
             line-height: 50px;
-            color: #FFFFFF;
+            color: #000000;
             font-size: 18px;
             text-align: center;
         }
@@ -41,8 +42,11 @@
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../script/Convert_Pinyin.js"></script>
 <script type="text/javascript">
     var friends;
+    var arr = new Array();
+    arr['citys'] = new Array();
     apiready = function() {
         users = $api.getStorage("users");
         api.ajax({
@@ -55,71 +59,110 @@
                 },
             }
         }, function (ret, err) {
-            var arr = new Array();
-            friends = ret.data;
-            arr['friends'] = new Array();
+
             if(ret.data){
+
                 $.each(ret.data,function(index,value){
-                     arr['friends'][index] = value;
+                    friends = {
+                        "id":value.fid,
+                        "city":value.nickname,
+                        "photo":value.photo,
+                        "pinyin":value.nickname== "重庆" ? "chongqing" : pinyin.getFullChars(value.nickname),
+                    }
+                    arr['citys'][index] = friends
+                });
+                console.log(JSON.stringify(arr['citys']))
+                var fs = api.require('fs');
+                fs.open({
+                    path: 'widget://res/personList.json',
+                    flags: 'read_write'
+                }, function(re, er){
+                    console.log("re.fd" + re.fd)
+                    fs.write({
+                        fd: re.fd,
+                        data: {"citys": arr['citys']},
+                        codingType: 'utf8',
+                        offset: 0
+                    }, function(rets, errs) {
+                        console.log("write=======================")
+                        if( rets.status ){
+                            console.log("ret"+ JSON.stringify( rets ) );
+                        }else{
+                            console.log("err"+ JSON.stringify( errs ) );
+                        }
+                    });
+                    fs.close({
+                        fd : re.fd
+                    });
+
                 });
             }
-            console.log(JSON.stringify(arr['friends']))
+
+            //console.log(JSON.stringify(arr))
         });
         fnReady();
-        var UIListBook = api.require('UIListBook');
-        UIListBook.open({
+        var uicitylist = api.require('UICityList');
+        uicitylist.open({
             rect: {
                 x: 0,
-                y: 0,
+                y: headerHeight,
                 w: api.winWidth,
-                h: api.frameHeight
+                h: api.frameHeight - headerHeight
             },
-            data: [{
-                uid: '1001',
-                imgPath: 'widget://res/img/apicloud.png',
-                title: '标题',
-                subTitle: '子标题，说明文字',
-                icon: ''
-            }, {
-                uid: '1002',
-                imgPath: 'widget://res/img/apicloud.png',
-                title: '标题gd',
-                subTitle: '子标gf题，说明文字',
-                icon: ''
-            }],
-            rightBtns: [{
-                bgColor: '#388e8e',
-                width: 70,
-                title: '按钮',
-                titleSize: 12,
-                titleColor: '#fff',
-                icon: '',
-                iconWidth: 20
-            }],
+            resource: 'widget://res/personList.json',
             styles: {
-                borderColor: '#696969',
+                searchBar: {
+                    bgColor: '#ededed',
+                    cancelColor: '#E3E3E3'
+                },
+                location: {
+                    color: '#696969',
+                    size: 12
+                },
+                sectionTitle: {
+                    bgColor: '#eee',
+                    color: '#000',
+                    size: 12
+                },
                 item: {
-                    bgColor: '#AFEEEE',
-                    activeBgColor: '#F5F5F5',
-                    imgWidth: 40,
-                    imgHeight: 40,
-                    imgCorner: 4,
-                    placeholderImg: '',
-                    titleSize: 12.0,
-                    titleColor: '#000',
-                    subTitleSize: 12.0,
-                    subTitleColor: '#000',
-                    remarkColor: '#000',
-                    remarkSize: 16,
-                    remarkIconWidth: 30
+                    bgColor: '#fff',
+                    activeBgColor: '#ccc',
+                    color: '#888',
+                    size: 14,
+                    height: 40,
+                },
+                searchEmptyView: {             //JSON对象；搜索结果为空时显示效果配置
+                    image: {              //JSON对象；图片配置
+                        path: 'widget://image/10.png',             //字符串类型；图片路径，要求本地路径（fs://、widget://）；不传则不显示
+                        w: 14,                //数字类型；图片宽；默认：100
+                        h: 36,                //数字类型；图片高；默认：80
+                        marginB: 10,           //数字类型；图片下边距离模块下边距离；默认：自适应上下居中显示
+                    },
+                },
+                indicator: {
+                    bgColor: '#fff',
+                    color: '#696969'
                 }
             },
-            fixedOn: api.frameName
+            //currentCity: '北京',
+            //locationWay: 'GPS',
+            //hotTitle: '热门城市',
+            fixedOn: api.frameName,
+            placeholder: '输入好友昵称'
         }, function(ret, err) {
-            if (ret) {
-                alert(JSON.stringify(ret));
-            } else {
-                alert(JSON.stringify(err));
+            if (ret.eventType == 'selected') {
+                $api.setStorage('city', ret.cityInfo.city);
+                api.sendEvent({
+                    name: 'cityChange',
+                });
+                api.closeWin();
+                api.openWin({
+                    name: 'login',
+                    url: '../login.html',
+                    pageParam: {
+                        name: 'test'
+                    }
+                });
             }
         });
     };

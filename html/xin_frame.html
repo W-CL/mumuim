@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title>APICloud APP</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style>
+            html,
+            body {
+                height: 100%;
+                background-color: #f0f0f0;
+            }
+            
+            .h10 {
+                height: 10px;
+                background: #f0f0f0;
+            }
+            
+            .h1 {
+                height: 1px;
+                background: #f0f0f0;
+            }
+            
+            .fr {
+                float: right;
+            }
+            
+            .hint {
+                color: #666;
+                font-size: 12px;
+                margin-right: 5px;
+            }
+            
+            .firstblock,
+            .secondblock,
+            .thirdblock {
+                background-color: #fff;
+            }
+            
+            .login {
+                background-image: url(../image/my/personal_bkg.jpg);
+                background-repeat: no-repeat;
+                background-size: contain;
+                position: relative;
+            }
+            
+            .loginbg {
+                width: 100%;
+				-webkit-filter: blur(10px); /* Chrome, Opera */
+       -moz-filter: blur(10px);
+        -ms-filter: blur(10px);    
+            filter: blur(10px);  
+            }
+            
+            .login .personal_logo {
+                position: absolute;
+                top: -116px;
+                width: 64px;
+                height: 64px;
+                left: 33px;
+            }
+            
+            .person_arrow {
+                position: absolute;
+                height: 20px;
+                right: 33px;
+                top: -96px;
+            }
+            
+            .login .userinfo {
+	position: absolute;
+	top: -113px;
+	margin-left: 100px;
+	left: 21px;
+            }
+            
+            .login .userinfo .title {
+                font-size: 22px;
+                color: #666666;
+            }
+            
+            .login .userinfo .subtitle {
+                font-size: 14px;
+                color: #666666;
+                border: 1px solid #fff;
+                display: inline-block;
+                padding: 3px;
+                border-radius: 4px;
+                margin-top: 5px;
+            }
+            
+            .item {
+                height: 60px;
+                line-height: 60px;
+                padding-left: 15px;
+                background-color: #fff;
+            }
+            
+            .item_ico {
+                float: left;
+                width: 35px;
+                padding: 8px 8px 0px 0;
+            }
+            
+            .item_arrow {
+                float: right;
+                width: 50px;
+                padding: 0px 15px 0px 0;
+            }
+            
+            .item-hov {
+                background-color: #E8E8E8;
+            }
+			.searchbar {height: 55px;background: #E7E8EC;}		
+            .searchbar .guncotton {margin: 0 10px;height: 50px; line-height: 50px;}
+            .searchbar .guncotton input {width: 100%; font-size: 0.8em; line-height: 3em; height: 3em; outline: none; background-color: #fff; padding-left: 10px; border-radius: 5px; box-sizing: border-box;}
+        </style>
+    </head>
+
+    <body>
+<div class="searchbar">		
+	<div class="guncotton">		
+       <input id="num" type="text" placeholder="搜索手机号/昵称" />
+	</div>		
+</div>	
+        <div class="h10"></div>
+
+
+<div class="firstblock">
+
+<div style="width:100%" class="item open-win" win="myorder" >
+    <img id="photo"   width="40" height="40"alt="" class="item_ico">
+    <span id="usernames"></span>
+    <span id="intro"></span>
+    <a data-id="" class="add_friend  add_new_friend" class="item_arrow">添加</a>
+</div>
+<div class="h1"></div>
+
+<div style="width:100%" class="item open-win" win="myorder" >
+<img src="https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c858c9bdb6abb8dfcbd9b8d6313939398067.jpg" alt="" class="item_ico">
+<span>不吃草的驴</span>
+<a class="item_arrow">添加</a>
+</div>
+<div class="h1"></div>
+
+
+
+<div  style="width:100%;" class="item open-win" win="myorder" >
+<img src="https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/c858c9bdb6abb8dfcbd9b8d6313939398067.jpg" alt="" class="item_ico">
+<span>不吃草的驴</span>
+<a class="item_arrow">添加</a>
+</div>
+<div class="h1"></div>
+
+
+</div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../script/toaddfriend.js"></script>
+<script  type="text/javascript">
+    var usernames = $api.byId('usernames');
+    var intro = $api.byId('intro');
+    var photo = $api.byId('photo');
+    var users = $api.getStorage("users");
+    $(function(){
+        $('#num').bind('input propertychange', function() {
+            var username = $(this).val();
+            var db = api.require("db")
+            openDb(db)
+            db.selectSql({
+                name: 'mylocaldb',
+                sql: 'SELECT * FROM toAddFriend where nickname="'+username+'"'
+            }, function(ret, err){
+                if( ret.status ){
+                    if(ret.data){
+
+                    }else{
+                        api.ajax({
+                            url: 'http://www1.msc8i8.cn/index/phone/request',
+                            method: 'post',
+                            data: {
+                                values: {
+                                    "ac": "findUser",
+                                    "nickname": username,
+                                    "uid": users.id
+                                },
+                            }
+                        }, function (ret, err) {
+                            console.log(JSON.stringify(ret.data))
+                            var string = ret.data;
+                            if (ret.code == 200) {
+                                var user = ret.data;
+                                var data = {
+                                    username: user.username,
+                                    nickname: user.nickname,
+                                    uid: user.id,
+                                    photo: user.photo || '../image/my/profile_default.png',
+                                    intro: user.intro || '这个人很懒，什么也没说',
+                                    online: user.online,
+                                    isfriend: user.isfriend,
+                                }
+                                insertToAddFriend(db, data)//添加1条信息到数据库
+                                usernames.innerHTML = string.username || '';
+                                intro.innerHTML = string.intro || '此人很懒，什么都没有写';
+                                $(".add_new_friend").data("id",string.id)
+                                photo.style.backgroundImage = 'url(' +string.photo+ ')' || 'url(../image/my/profile_default.png)'
+                            }
+                        });
+                    }
+                }else {
+                    console.log("selecterr" + JSON.stringify( err ) );
+                }
+            });
+        })
+    })
+
+    apiready = function  () {
+        $(document).on('click','.add_new_friend',function(){
+            var fid = $(this).data("id")
+            var username = $("#usernames").text();
+            api.ajax({
+                url: 'http://www1.msc8i8.cn/index/phone/request',
+                method: 'post',
+                data: {
+                    values: {
+                        "ac": "friendly",
+                        "uid": users.id,
+                        "fid":fid
+                    },
+                }
+            }, function (ret, err) {
+                var string = ret.data;
+                if (ret.code == 200) {
+                    var key = users.id+"_"+username;
+                    var tofriends = $api.getStorage(key)
+                    if(tofriends){
+                        tofriends.isfriend = 1;
+                        $api.setStorage(key,tofriends);
+                    }
+                    $(".add_new_friend").css("color","#999999");
+                    $(".add_new_friend").text("已添加");
+                }
+
+            });
+        })
+
+    }
+
+
+
+</script>
+
+
+</html>

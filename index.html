@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
         <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-        <title>APICloud App</title>
+        <title>mumuim</title>
         <link rel="stylesheet" type="text/css" href="./css/api.css" />
         <style>
             html,
@@ -31,6 +31,7 @@
             header {
                 position: relative;
                 height: auto;
+				background-color:#ededed;
             }
             
             footer {
@@ -49,7 +50,7 @@
 	flex: 1;
 	width: 100%;
 	color: rgb(165, 165, 165);
-	font-size: 10px;
+	font-size: 11px;
 	text-align: center;
 	padding-bottom: 4px;
 	padding-top: 28px;
@@ -67,31 +68,40 @@
             }
             
             footer>div:nth-child(3) {
-                background-image: url(./image/footer/find.png);
+                background-image: url(./image/footer/haoyou.png);
             }
             
             footer>div:nth-child(4) {
+                background-image: url(./image/footer/find.png);
+            }
+			
+			footer>div:nth-child(5) {
                 background-image: url(./image/footer/my.png);
             }
             
             footer>div:nth-child(1).active {
                 background-image: url(./image/footer/home_act.png);
-                color: rgb(254, 151, 84);
+                color: rgb(11, 174, 116);
             }
             
             footer>div:nth-child(2).active {
                 background-image: url(./image/footer/groupbuy_act.png);
-                color: rgb(254, 151, 84);
+                color: rgb(11, 174, 116);
             }
             
             footer>div:nth-child(3).active {
-                background-image: url(./image/footer/find_act.png);
-                color: rgb(254, 151, 84);
+                background-image: url(./image/footer/haoyou1.png);
+                color: rgb(11, 174, 116);
             }
             
             footer>div:nth-child(4).active {
+                background-image: url(./image/footer/find_act.png);
+                color: rgb(11, 174, 116);
+            }
+			
+			footer>div:nth-child(5).active {
                 background-image: url(./image/footer/my_act.png);
-                color: rgb(254, 151, 84);
+                color: rgb(11, 174, 116);
             }
             
             .header-item {
@@ -251,66 +261,42 @@
     </head>
 
     <body>
-        <header id="header">
-            <div class="header-item header-item-act" id="home">
-                <div style="padding-top:13px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-  <td align="center" width="50"><div tapmode="highlight" onClick="fnOpenScanner()">
-            <img width="23" src="./image/header/sao.png">
-                </div></td>
-    <td><div class="home-search open-win" win="html/search">
-                    <img src="./image/header/search_home.png">
-                    <span>产品名称/关键词搜索</span>
-                </div>	</td>
-    
-    <td align="center" width="50"><div tapmode="highlight" onClick="fnOpenScanner()">
-            <img width="23" src="./image/header/jia.png">
-                </div></td>
-  </tr>
-</table>
-</div>
-            </div>
+
+<header id="header">
+
+<div class="header-item header-item-act" id="home">
+<div style="padding-top:13px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td align="center" width="50"><div tapmode="highlight" onClick="fnOpenScanner()"><img width="23" src="./image/header/sao.png"></div></td><td>
+<div class="home-search open-win" win="html/search">
+<img src="./image/header/search_home.png">
+<span>产品名称/关键词搜索</span>
+</div></td><td align="center" width="50"><div tapmode="highlight" onClick="fnOpenScanner()"><img width="23" src="./image/header/jia.png"></div></td></tr></table>
+</div></div>
 
 <div class="header-item" id="groupbuy">
-
-<div style="padding-top:13px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><div align="center" style="color:#333333; padding-left:50px;">财富</div></td>
-    <td align="center" width="50"><div class="open-win" win="html/message">
-            <img width="25" src="./image/header/sousuo.png">
-                </div></td>
-  </tr>
-</table>
-</div>
-                  
- </div>
+<div style="padding-top:13px;"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td><div align="center" style="color:#333333; padding-left:50px;">财富</div></td><td align="center" width="50"><div class="open-win" win="html/message"><img width="25" src="./image/header/sousuo.png"></div></td></tr></table>
+</div></div>
 
 <div class="header-item" id="find">
-
-<div style="padding-top:13px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><div align="center" style="color:#333333; padding-left:80px;">朋友</div></td>
-    <td align="center" width="30"><div class="open-win" win="html/friendlist">
-            <img width="20" src="./image/header/jia1.png">
-                </div></td>
-	<td align="center" width="50"><div tapmode="highlight" onClick="fnOpenScanner()">
-            <img width="20" src="./image/header/jia.png">
-                </div></td>
-  </tr>
-</table>
-</div>
-                  
- </div>
+<div style="padding-top:13px;"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td><div align="center" style="color:#333333; padding-left:80px;">朋友</div></td><td align="center" width="30"><div class="open-win" win="html/friendlist"><img width="20" src="./image/header/jia1.png"></div></td><td align="center" width="50"><div tapmode="highlight" onClick="fnOpenScanner()"><img width="20" src="./image/header/jia.png"></div></td></tr></table>
+</div></div>
 			
-            <div class="header-item" id="my">
-            </div>
+<div class="header-item" id="search_frame">
+<div style="padding-top:13px;"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td><div align="center" style="color:#333333; padding-left:80px;">发现</div></td><td align="center" width="30"><div class="open-win" win="html/contactslist"><img width="20" src="./image/header/jia1.png"></div></td><td align="center" width="50"><div tapmode="highlight" onClick="fnOpenScanner()"><img width="20" src="./image/header/jia.png"></div></td></tr></table>
+</div></div>
+
+<div class="header-item" id="my">
+</div>
+
         </header>
         <section></section>
         <footer id="footer">
             <div class="menu active" tapmode="active" onClick="fnChange(0)">首页</div>
             <div class="menu" tapmode="active" onClick="fnChange(1)">财富</div>
             <div class="menu" tapmode="active" onClick="fnChange(2)">朋友</div>
-          <div class="menu" tapmode="active" onClick="fnChange(3)">我的</div>
+			<div class="menu" tapmode="active" onClick="fnChange(3)">发现</div>
+          <div class="menu" tapmode="active" onClick="fnChange(4)">我</div>
         </footer>
     </body>
     <script type="text/javascript" src="./script/api.js"></script>
@@ -424,7 +410,7 @@
             });
         };
 
-        var frames = ['home_frame', 'groupbuy_frame', 'find_frame', 'my_frame'];
+        var frames = ['shouye_frame1', 'groupbuy_frame', 'find_frame', 'index_frame1', 'my_frame'];
 
         function fnChange(index) {
             for (var i = 0; i < headers.length; i++) {
@@ -432,7 +418,7 @@
                     $api.addCls(headers[i], 'header-item-act');
                     $api.addCls(footers[i], 'active');
 
-                    var y = 3 == index ? 0 : headerHeight;
+                    var y = 4 == index ? 0 : headerHeight;
                     api.openFrame({
                         name: frames[i],
                         url: './html/' + frames[i] + '.html',
@@ -461,7 +447,7 @@
 
         function fnOpenWelcome() {
             var frames = [];
-            for (var i = 1; i <= 4; i++) {
+            for (var i = 1; i <= 5; i++) {
                 frames.push({
                     name: 'welcome_frame_' + i,
                     url: './html/welcome_frame_' + i + '.html',

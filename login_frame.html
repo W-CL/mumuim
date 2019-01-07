@@ -226,13 +226,17 @@ border-radius: 50%;//圆角百分比
     <script type="text/javascript">
         var wx,dynamicToken;
         apiready = function() {
+		     
+
         UIChatBox = api.require('UIChatBox');
         api.setStatusBarStyle({
             color: '#ededed'
         });
 		api.setStatusBarStyle({
             style: 'dark'
+			
         });
+		
             wx = api.require('wx');
             var users = $api.getStorage("users");
             if(users){
