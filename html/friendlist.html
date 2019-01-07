@@ -59,9 +59,7 @@
                 },
             }
         }, function (ret, err) {
-
             if(ret.data){
-
                 $.each(ret.data,function(index,value){
                     friends = {
                         "id":value.fid,
@@ -71,7 +69,6 @@
                     }
                     arr['citys'][index] = friends
                 });
-                console.log(JSON.stringify(arr['citys']))
                 var fs = api.require('fs');
                 fs.open({
                     path: 'widget://res/personList.json',

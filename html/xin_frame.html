@@ -128,8 +128,10 @@
         <div class="h10"></div>
 
 
-<div class="firstblock">
+<div class="firstblock" id="firstblock"> </div>
 
+
+<script id="info_tmpl" type="text/x-dot-template">
 <div style="width:100%" class="item open-win" win="myorder" >
     <img id="photo"   width="40" height="40"alt="" class="item_ico">
     <span id="usernames"></span>
@@ -153,25 +155,29 @@
 <a class="item_arrow">添加</a>
 </div>
 <div class="h1"></div>
+</script>
 
 
-</div>
 
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../script/toaddfriend.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
 <script  type="text/javascript">
-    var usernames = $api.byId('usernames');
+    var usernames = "asdasd";//$api.byId('usernames');
     var intro = $api.byId('intro');
     var photo = $api.byId('photo');
     var users = $api.getStorage("users");
     $(function(){
+        var interText = doT.template($("#info_tmpl").text());
+        $("#firstblock").html(interText(usernames));
         $('#num').bind('input propertychange', function() {
             var username = $(this).val();
             var db = api.require("db")
             openDb(db)
+
             db.selectSql({
                 name: 'mylocaldb',
                 sql: 'SELECT * FROM toAddFriend where nickname="'+username+'"'
@@ -205,10 +211,8 @@
                                     isfriend: user.isfriend,
                                 }
                                 insertToAddFriend(db, data)//添加1条信息到数据库
-                                usernames.innerHTML = string.username || '';
-                                intro.innerHTML = string.intro || '此人很懒，什么都没有写';
-                                $(".add_new_friend").data("id",string.id)
-                                photo.style.backgroundImage = 'url(' +string.photo+ ')' || 'url(../image/my/profile_default.png)'
+                                var interText = doT.template($("#info_tmpl").text());
+                                $("#firstblock").html(interText(ret.data));
                             }
                         });
                     }
