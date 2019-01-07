@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>cityList</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        header {
+            background-color: #ededed;
+            border-bottom: solid #ededed 1px;
+        }
+
+        h1 {
+            height: 50px;
+            line-height: 50px;
+            color: #FFFFFF;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .back {
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            width: 50px;
+            height: 50px;
+            background: url(../image/cm2_icn_back.png) center center no-repeat;
+            background-size: 15px auto;
+        }
+    </style>
+</head>
+
+<body>
+<header id="header">
+    <div class="back event-back"></div>
+    <h1>好友列表</h1>
+</header>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    var friends;
+    apiready = function() {
+        users = $api.getStorage("users");
+        api.ajax({
+            url: 'http://www1.msc8i8.cn/index/phone/request',
+            method: 'post',
+            data: {
+                values: {
+                    "ac": "findFriends",
+                    "uid": users.id
+                },
+            }
+        }, function (ret, err) {
+            var arr = new Array();
+            friends = ret.data;
+            arr['friends'] = new Array();
+            if(ret.data){
+                $.each(ret.data,function(index,value){
+                     arr['friends'][index] = value;
+                });
+            }
+            console.log(JSON.stringify(arr['friends']))
+        });
+        fnReady();
+        var UIListBook = api.require('UIListBook');
+        UIListBook.open({
+            rect: {
+                x: 0,
+                y: 0,
+                w: api.winWidth,
+                h: api.frameHeight
+            },
+            data: [{
+                uid: '1001',
+                imgPath: 'widget://res/img/apicloud.png',
+                title: '标题',
+                subTitle: '子标题，说明文字',
+                icon: ''
+            }, {
+                uid: '1002',
+                imgPath: 'widget://res/img/apicloud.png',
+                title: '标题gd',
+                subTitle: '子标gf题，说明文字',
+                icon: ''
+            }],
+            rightBtns: [{
+                bgColor: '#388e8e',
+                width: 70,
+                title: '按钮',
+                titleSize: 12,
+                titleColor: '#fff',
+                icon: '',
+                iconWidth: 20
+            }],
+            styles: {
+                borderColor: '#696969',
+                item: {
+                    bgColor: '#AFEEEE',
+                    activeBgColor: '#F5F5F5',
+                    imgWidth: 40,
+                    imgHeight: 40,
+                    imgCorner: 4,
+                    placeholderImg: '',
+                    titleSize: 12.0,
+                    titleColor: '#000',
+                    subTitleSize: 12.0,
+                    subTitleColor: '#000',
+                    remarkColor: '#000',
+                    remarkSize: 16,
+                    remarkIconWidth: 30
+                }
+            },
+            fixedOn: api.frameName
+        }, function(ret, err) {
+            if (ret) {
+                alert(JSON.stringify(ret));
+            } else {
+                alert(JSON.stringify(err));
+            }
+        });
+    };
+
+</script>
+
+</html>
