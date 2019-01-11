@@ -40,36 +40,40 @@
     </style>		
 </head>		
 <body>
-	<div class="login" onClick="" tapmode>		
-		<img src="../image/api_31.png" alt="" class="loginbg">
-		<img src="../image/api_32.png" alt="" class="personal_logo">
-		<div class="userinfo">		
-			<div class="title">不吃草的驴</div>		
-			<div class="subtitle">木木号：13060606961</div>		
-		</div>		
-		<img src="../image/personal_icon_arrow.png" alt="" class="person_arrow">		
-	</div>		
-		
-		
-	<!-- 第一块 -->		
-	<div class="firstblock">		
-		<div class="item" tapmode="presshover" onClick="">		
-			<img src="../image/my_order_user_icon_normal.png" alt="" class="item_ico">		
-			<span>电话号码</span>		
-			13060606961		
-		</div><div class="h1"></div>		
-		<div class="item" tapmode="presshover" onClick="">		
-			<img src="../image/my_coupon_user_icon_normal.png" alt="" class="item_ico">		
-			<span>地区</span>		
-			广西南宁		
+	<div class="login" id="user_xiangxi_info" onClick="" tapmode>
+
+	</div>
+	<script id="find_toaddfrend_info" type="text/x-dot-template">
+
+		<img src="{{=it.photo}}" alt="" class="loginbg">
+		<img src="{{=it.photo}}" alt="" class="personal_logo">
+		<div class="userinfo">
+			<div class="title">{{=it.nickname}}</div>
+			<div class="subtitle">{{=it.intro}}</div>
 		</div>
-		<div class="h1"></div>		
-		<div class="item" tapmode="presshover" onClick="">		
-			<img src="../image/my_wallet_user_icon_normal.png" alt="" class="item_ico">		
-			<span>财富排名</span>		
-			好友109位 / 全国1908901位		
-		</div>		
-	</div>		
+		<img src="../image/personal_icon_arrow.png" alt="" class="person_arrow">
+
+	</script>
+		
+	<!--&lt;!&ndash; 第一块 &ndash;&gt;		-->
+	<!--<div class="firstblock">		-->
+		<!--<div class="item" tapmode="presshover" onClick="">		-->
+			<!--<img src="../image/my_order_user_icon_normal.png" alt="" class="item_ico">		-->
+			<!--<span>电话号码</span>		-->
+			<!--13060606961		-->
+		<!--</div><div class="h1"></div>		-->
+		<!--<div class="item" tapmode="presshover" onClick="">		-->
+			<!--<img src="../image/my_coupon_user_icon_normal.png" alt="" class="item_ico">		-->
+			<!--<span>地区</span>		-->
+			<!--广西南宁		-->
+		<!--</div>-->
+		<!--<div class="h1"></div>		-->
+		<!--<div class="item" tapmode="presshover" onClick="">		-->
+			<!--<img src="../image/my_wallet_user_icon_normal.png" alt="" class="item_ico">		-->
+			<!--<span>财富排名</span>		-->
+			<!--好友109位 / 全国1908901位		-->
+		<!--</div>		-->
+	<!--</div>		-->
 			
 		
 	<!-- 第二块 -->		
@@ -94,7 +98,7 @@
 	<!-- 第三块 -->		
 	<div class="h10"></div>		
 	<div class="thirdblock">		
-		<div align="center" style="background-color:#00CC66; color:#FFFFFF;" class="item" tapmode="presshover" onClick=""><span>发消息</span></div>
+		<div align="center" style="background-color:#00CC66; color:#FFFFFF;" class="item" tapmode="presshover" onClick="openTalking()"><span>发消息</span></div>
 		<div class="h10"></div>		
 		<div align="center" style="background-color:#FF0000; color:#FFFFFF;" class="item" tapmode="presshover" onClick=""><span>删除</span></div>		
 	</div>		
@@ -102,8 +106,37 @@
 		
 	<div class="h10"></div>		
 </body>		
-<script type="text/javascript" src="../script/api.js"></script>		
-<script type="text/javascript">		
-		
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/toaddfriend.js"></script>
+<script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+	var friend ;
+	apiready = function  () {
+		var id = api.pageParam.uid;
+		db = api.require("db")
+		openDb(db)
+		db.selectSql({
+			name: 'mylocaldb',
+			sql: 'SELECT * FROM toAddFriend where uid='+id
+		}, function(rets, errs){
+			var tofindtoaddfriend =  rets.data[0];
+			friend =  rets.data[0];
+			if(tofindtoaddfriend ){
+				var interText = doT.template($("#find_toaddfrend_info").text());
+				$("#user_xiangxi_info").html(interText(tofindtoaddfriend));
+			}
+		})
+	}
+	function openTalking(){
+		api.openWin({
+			name: 'im',
+			url: 'im_window.html',
+			pageParam: {
+				friend: friend
+			}
+		});
+	}
 </script>		
 </html>		

@@ -11,7 +11,6 @@
             html,
             body {
                 height: 100%;
-
 				background-image: linear-gradient(160deg, #ededed 20%,#cfcfcf 80%);
             }
             
@@ -40,10 +39,10 @@
             }
             
             .item {
-	position: relative;
-	border-bottom-width: 0.5px;
-	border-bottom-style: solid;
-	border-bottom-color: #DEDEDE;
+                position: relative;
+                border-bottom-width: 0.5px;
+                border-bottom-style: solid;
+                border-bottom-color: #DEDEDE;
             }
             
             .btn {
@@ -170,29 +169,29 @@
             input {
                 outline: none;
             }
-.box1{
 
-width:120px;
+            .box1{
+                width:120px;
 
-height:120px;
+                height:120px;
 
-margin: 20px auto;
+                margin: 20px auto;
 
-border: 2px solid #oooooo;
+                border: 2px solid #oooooo;
 
-text-align: center;
+                text-align: center;
 
-line-height: 120px;
+                line-height: 120px;
 
-font-weight: bold;
+                font-weight: bold;
 
-font-size: 24px;
+                font-size: 24px;
 
-background: burlywood;
+                background: burlywood;
 
-border-radius: 50%;//圆角百分比
+                border-radius: 50%;//圆角百分比
 
-}
+            }
         </style>
     </head>
 
@@ -204,13 +203,14 @@ border-radius: 50%;//圆角百分比
         <section>
             <div class="item email">
                 <img src="image/login01.png">
-                <input type="text" placeholder="手机号码" id="email">
+                <input type="text" placeholder="用户名" id="email">
             </div>
             <div class="item passwd">
                 <img src="image/login02.png">
-                <input type="password" placeholder="验证码" id="passwd">
+                <input type="password" placeholder="密码" id="passwd">
             </div>
             <div class="btn" tapmode onClick="fnLogin()">登 录</div>
+            <div class="btn" tapmode onClick="regist()">注 册</div>
         </section>
 			<div style="padding:50px;" align="center">
 	  <p><img onClick="WeiXinmsg()" src="image/weixin1.png" width="66" height="66"></p>
@@ -226,8 +226,6 @@ border-radius: 50%;//圆角百分比
     <script type="text/javascript">
         var wx,dynamicToken;
         apiready = function() {
-		     
-
         UIChatBox = api.require('UIChatBox');
         api.setStatusBarStyle({
             color: '#ededed'
@@ -237,17 +235,17 @@ border-radius: 50%;//圆角百分比
 			
         });
 		
-            wx = api.require('wx');
-            var users = $api.getStorage("users");
-            if(users){
-                api.openWin({
-                    name: 'index',
-                    url: 'index.html',
-                    pageParam: {
-                        name: 'test'
-                    }
-                });
-            }
+        wx = api.require('wx');
+        var users = $api.getStorage("users");
+        if(users){
+            api.openWin({
+                name: 'index',
+                url: 'index.html',
+                pageParam: {
+                    name: 'test'
+                }
+            });
+        }
 
         };
         //微信登陆
@@ -264,6 +262,16 @@ border-radius: 50%;//圆角百分比
 				}
 			});
 		}
+
+       function regist(){
+           api.openWin({
+               name: 'regist',
+               url: './html/register.html',
+               pageParam: {
+                   name: 'test'
+               }
+           });
+       }
 
 		//登陆授权并获取code
 		function getcode(wx){
@@ -325,7 +333,7 @@ border-radius: 50%;//圆角百分比
                 }
 			    if (ret.status) {
                     api.ajax({
-                        url:'http://www1.msc8i8.cn/index/phone/request',
+                        url:'http://app.clearworld.cn/index.php?m=default&c=phone&a=request',
                         method:'post',
                         data:{
                             values: {
@@ -343,8 +351,7 @@ border-radius: 50%;//圆角百分比
                         if(!err){
                             if(ret.code == 200){
                                 $api.setStorage("users",ret.data.users);
-                                $api.setStorage("friends",ret.data.friends);
-                                $api.setStorage("rooms",ret.data.rooms);
+
                                 api.openWin({
                                     name: 'index',
                                     url: 'index.html',
@@ -377,10 +384,10 @@ border-radius: 50%;//圆角百分比
 			});
 		}
 
-		//登陆
+		//会员登陆
         function fnLogin(){
              api.ajax({
-                 url:'http://www1.msc8i8.cn/index/phone/request',
+                 url:'http://app.clearworld.cn/index.php?m=default&c=phone&a=request&ac=login',
                  method:'post',
                  data:{
                      values: {
@@ -390,15 +397,16 @@ border-radius: 50%;//圆角百分比
                      },
                  }
              },function(ret,err){
+                 console.log(JSON.stringify(ret))
                  if(!err){
                      if(ret.code == 200){
-                           if(ret.data.users){
+                           if(ret.data){
                                api.toast({
                                    msg: '登陆成功!',
                                    duration: 3000,
                                    location: 'bottom'
                                });
-                               $api.setStorage("users",ret.data.users);
+                               $api.setStorage("users",ret.data);
                            }else{
                                api.toast({
                                    msg: '获取用户信息失败!',
@@ -406,8 +414,6 @@ border-radius: 50%;//圆角百分比
                                    location: 'bottom'
                                });
                            }
-                           $api.setStorage("friends",ret.data.friends);
-                           $api.setStorage("rooms",ret.data.rooms);
                            api.openWin({
                                 name: 'index',
                                 url: 'index.html',

@@ -90,21 +90,21 @@
         <section>
             <div class="item email">
                 <img src="../image/login01.png">
-                <input type="text" placeholder="邮箱" id="email">
+                <input type="text" placeholder="用户名" id="username">
             </div>
             <div class="item passwd">
                 <img src="../image/login02.png">
                 <input type="password" placeholder="密码" id="password">
             </div>
-            <div class="item passwd">
-                <img src="../image/login02.png">
-                <input type="text" placeholder="电话号码" id="mobile">
-            </div>
-            <div class="item passwd">
-                <img src="../image/login02.png">
-                <input type="text" placeholder="验证码" id="test">
-                <input type="button" value="获取验证码" onclick="check()"/>
-            </div>
+            <!--<div class="item passwd">-->
+                <!--<img src="../image/login02.png">-->
+                <!--<input type="text" placeholder="电话号码" id="mobile">-->
+            <!--</div>-->
+            <!--<div class="item passwd">-->
+                <!--<img src="../image/login02.png">-->
+                <!--<input type="text" placeholder="验证码" id="test">-->
+                <!--<input type="button" value="获取验证码" onclick="check()"/>-->
+            <!--</div>-->
             <div class="btn" tapmode onclick="fnRegister();">注 册</div>
         </section>
     </body>
@@ -115,52 +115,9 @@
         apiready = function() {
 
         };
-		
-		function check(){
-			api.openWin({
-                name: "test1",
-                url: './test1.html'
-            });
-		}
+
         function fnRegister() {
-            fnPost('/phone', {
-//              body: JSON.stringify({
-//              	ac:"register",
-//                  username: $api.byId('email').value,
-//                  password: $api.byId('password').value
-//              })
-			body: '{"ac":"register","username":"'
-			+$api.byId('email').value
-			+'","password":"'
-			+$api.byId('password').value
-			+'","mobile":"'
-			+$api.byId('mobile').value
-			+'","test":"'
-			+$api.byId('test').value
-			+'"}'
-            }, 'application/json', false, false, function(ret, err) {
-   				
-                if (ret && ret.msg==0) {
-                    api.execScript({
-                        name: 'register',
-                        frameName: 'login_frame',
-                        script: 'fnSetEmail("' + $api.byId('email').value + '");'
-                    });
 
-                    api.alert({
-                        title: '注册',
-                        msg: '注册成功，请登录'
-                    });
-
-                    api.closeWin();
-                } else {
-                    api.toast({
-                        msg: ret.param,
-                        duration: 2000,
-                        location: 'bottom'
-                    });
-                }
-            });
         };
     </script>
 

@@ -1,33 +1,57 @@
-<!DOCTYPE html>		
-<html>		
-<head>		
-	<meta charset="utf-8">		
-	<title>frame</title>		
-	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>		
-	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">		
-	<link rel="stylesheet" type="text/css" href="../css/api.css" />		
-    <link rel="stylesheet" type="text/css" href="../css/amazeui.min.css" />	
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>frame</title>
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/amazeui.min.css" />
     <link rel="stylesheet" type="text/css" href="../css/main.css" />
-	<style>		
-		html,body {min-height: 100%;background-color: #F5F5F5;height: 100%;word-wrap:break-word; word-break:break-all; font-size:12px;}		
-	</style>		
-</head>		
-<body>		
+	<style>
+		html,body {min-height: 100%;background-color: #F5F5F5;height: 100%;word-wrap:break-word; word-break:break-all; font-size:12px;}
+	</style>
+</head>
+<body>
 	<!--聊天页面样式-->
 	<div class="windows_body">
 		<div class="office_text" style="height: 100%;">
 			<!--聊天盒子-->
 			<ul class="content" id="chatbox">
-				<!--页面已有内容-->
-				<li class="me"><img src="../image/own_head.jpg" title="金少凯"><span>疾风知劲草，板荡识诚臣</span></li>
-				<li class="other"><img src="../image/head/15.jpg" title="张文超"><span>勇夫安知义，智者必怀仁</span></li>
+
 			</ul>
 		</div>
 	</div>
-</body>	
+
+	<script id="list_im_info" type="text/x-dot-template">
+
+		{{ for(var vi in it) { }}
+		{{? it[vi].uid==users.id}}
+		<li class="me"><img src="{{=users.photo}}" title="{{=users.nickname}}"><span>{{=it[vi].content}}</span></li>
+		{{??}}
+		<li class="other"><img src="{{=friend.photo}}" title="{{=friend.nickname}}"><span>{{=it[vi].content}}</span></li>
+		{{?}}
+		{{ } }}
+	</script>
+</body>
 	<script type="text/javascript" src="../script/api.js"></script>
-	<script>
+	<script type="text/javascript" src="../script/web_socket.js"></script>
+	<script type="text/javascript" src="../script/common.js"></script>
+	<script type="text/javascript" src="../script/taliking_room.js"></script>
+	<script type="text/javascript" src="../script/talking_message.js"></script>
+	<script type="text/javascript" src="../script/doT.min.js"></script>
+	<script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+	<script	type="text/javascript">
+		var ws,users,friend;
 		apiready = function(){
+			//接受用户信息
+			 friend = api.pageParam.friend;
+			//初始化数据库
+			db = api.require("db");
+			var roominfo;
+			openDb(db);
+			//获取信息发送者
+			 users = $api.getStorage("users");
 			//引入模块UIChatBox
 			var UIChatBox = api.require('UIChatBox');
 				//打开模块输入框
@@ -106,21 +130,120 @@
 				    }
 				}, function(ret, err) {
 					if (ret.eventType=='show'){//模块打开成功触发事件
-						
-					}else if (ret.eventType=='send') {//若点击发送触发事件
-					
-				        var panel = $api.byId("chatbox");
-				        panel.innerHTML += "<li class='me'><img src='../image/own_head.jpg'><span>"+ret.msg+"</span></li>";
+						//查询是否创建聊天房间
+						//deltable(db,"talkingRoom")
+						//deletefromtable(db,"talkingRoom")
+						db.selectSql({
+							name: 'mylocaldb',
+							sql: 'SELECT * FROM talkingRoom where id='+friend.uid
+						}, function(mylocaldb, er){
+							if(mylocaldb.status){
+								if(mylocaldb.data[0] && mylocaldb.data[0].id == friend.uid){
+									roominfo = mylocaldb.data[0]
+									//获取聊天信息
+									db.selectSql({
+										name: 'mylocaldb',
+										sql: 'SELECT * FROM talkingMessage where id='+roominfo.id
+									}, function(rets, err){
+										if(rets.data[0]){
+											var interText = doT.template($("#list_im_info").text());
+											$("#chatbox").prepend(interText(rets.data));
+										}
+									})
+								}else{
+									//添加聊天房间信息
+									var data = {
+										id: friend.uid,
+										photo:friend.photo,
+										roomType: 1,
+										roomName : friend.nickname,
+										createTime: timest(),
+										uid: users.id,
+
+									};
+									roominfo = data
+									insertTalkingRoom(db,data);
+								}
+
+							}
+							newTalkingRoom(db)//没有表格的时候创建
+						})
+						var json = {
+							type: "join",
+							room_id:1,
+						}
+						var joind_data =JSON.stringify(json)
+						console.log("websocket握手成功，发送登录数据:"+joind_data);
+						ws.send(joind_data);
+					}else if (ret.eventType=='send') {
+						//若点击发送触发事件
+						var json = {
+							type: "say",
+							room_id:1,
+							id : roominfo.id,//房间id(接收信息人的id)
+							uid : roominfo.uid ,//发送人的id
+							roomType : 1, //房间类型
+							content : ret.msg,// 聊天文字
+							video : "" ,// 聊天视频
+							photo  : "",//聊天图片
+							yuyin  :"",//聊天语音
+							biaoqing: "",// 聊天表情
+							createTime : timest(), //创建时间
+							massegeStatus :1  //是否被查看 :1否，2是
+						}
+						insertTalkingMessage(db,json)
+						var joind_data =JSON.stringify(json);
+						ws.send(joind_data);
+
+				       // var panel = $api.byId("chatbox");
+				       // panel.innerHTML += "<li class='me'><img src='../image/own_head.jpg'><span>"+ret.msg+"</span></li>";
 				    } else if(ret.eventType=='clickExtras'){//用户点击额外功能按钮触发
-				        
+
 
 				    }else if(ret.eventType=='clickRecord'){//用户点击录音功能按钮触发
-				        
+
 
 				    }
 				});
-				
+			connect();
 		}
+
+		// 连接服务端
+		function connect() {
+			// 创建websocket
+			ws = new WebSocket("ws://192.168.1.109:7272/");
+			ws.onmessage = onmessage;
+			ws.onclose = function() {
+				console.log("连接关闭，定时重连");
+				connect();
+			};
+			ws.onerror = function() {
+				console.log("出现错误");
+			};
+		}
+		function onmessage(e) {
+			var data = eval("("+e.data+")");
+			switch(data['type']) {
+					// 服务端ping客户端
+				case 'ping':
+					ws.send('{"type":"pong"}');
+					break;
+					// 发言
+				case 'join':
+					console.log("join"+JSON.stringify(data))
+					break;
+				case 'say':
+					console.log("say"+JSON.stringify(data))
+					 var panel = $api.byId("chatbox");
+					 panel.innerHTML += "<li class='me'><img src='../image/own_head.jpg'><span>"+data.content+"</span></li>";
+					break;
+				case 'logout':
+					//delete client_list[data['from_client_id']];
+					break;
+			}
+		}
+
+
 	</script>
-	
-</html>		
+
+</html>

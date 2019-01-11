@@ -304,6 +304,44 @@
     <script type="text/javascript" src="./script/localdb.js"></script>
     <script type="text/javascript">
         apiready = function() {
+
+            var clipBoard = api.require('clipBoard');
+            api.addEventListener({
+                name: 'resume'//前台
+            }, function (ret, err) {
+                clipBoard.get(function (rets, errs) {
+                    if (rets && rets.value) {
+                        var keyword = rets.value
+                        //alert("复制的内容："+keyword);
+                        clipBoard.set({
+                            value: ''
+                        }, function(re, err) {
+
+                        });
+
+                        api.confirm( {
+                            title: '是否搜索该产品',
+                            msg: keyword,
+                            buttons: [ '确定', '取消' ]
+                        }, function ( ret, err ) {
+                            var index = ret.buttonIndex;
+                            if ( index == 1 ) {
+                                api.openWin({
+                                    name: 'search_result',
+                                    url: './html/search_result.html',
+                                    pageParam: {
+                                        keyword:keyword,
+                                    }
+                                });
+                            }
+
+                        } )
+
+                    }
+                });
+
+
+            })
 			 
             var users = $api.getStorage("users");
             fnReadyOpenWin();
@@ -405,7 +443,23 @@
             var fnscanner = api.require('FNScanner');
             fnscanner.openScanner({}, function(ret, err) {
                 if (ret && 'success' == ret.eventType) {
-                    alert(ret.content);
+                    //alert(ret.content);
+                    api.openFrame({
+                        name: 'search_result',
+                        url: ret.content,
+                        rect: {
+                            x: 0,
+                            y: 0,
+                            w: 'auto',
+                            h: 'auto',
+                            marginTop:50,    //相对父 window 上外边距的距离
+                            marginBottom:'0',    //相对父 window 下外边距的距离
+                        },
+                        bounces: true,
+                        progress: {
+                            type: "default",
+                        }
+                    });
                 }
             });
         };

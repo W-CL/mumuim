@@ -10,6 +10,11 @@ function logout() {
     $api.clearStorage();
 }
 
+function timest() {
+    var tmp = Date.parse( new Date() ).toString();
+    tmp = tmp.substr(0,10);
+    return tmp;
+}
 
 function fnReadyKeyback() {
     var keybacks = $api.domAll('.event-back');
@@ -94,3 +99,74 @@ function fnReadyFrame() {
         pageParam: api.pageParam
     });
 };
+
+//数据操作
+
+/**
+ *初始化db
+ * @param db
+ */
+function openDb(db) {
+    db.openDatabase({
+        name: "mylocaldb"
+    }, function(ret, err){
+        if( ret.status ){
+            console.log("openret:"+JSON.stringify(ret))
+        }else{
+            console.log("openerr"+JSON.stringify(err))
+        }
+    });
+}
+
+/**
+ * 关闭数据库
+ */
+
+function closedb() {
+    db.closeDatabase({
+        name: 'mylocaldb'
+    }, function(ret, err){
+        if( ret.status ){
+            alert('关闭成功');
+        }else{
+            alert( JSON.stringify( err ) );
+        }
+    });
+}
+
+/**
+ * 删除表格
+ * @param db
+ * @param table
+ */
+
+function deltable(db,table) {
+    db.executeSql({
+        name: "mylocaldb",
+        sql: 'drop table '+table
+    }, function(ret, err) {
+        if (ret.status) {
+            console.log("删除表"+table+"成功:"+JSON.stringify(ret))
+        } else {
+            console.log("droperr"+JSON.stringify(err))
+        }
+    });
+}
+
+/**
+ * 清空表
+ * @param db
+ * @param table
+ */
+function deletefromtable(db,table) {
+    db.executeSql({
+        name: "mylocaldb",
+        sql: 'delete from   '+table
+    }, function(ret, err) {
+        if (ret.status) {
+            console.log("清空表"+table+"成功:"+JSON.stringify(ret))
+        } else {
+            console.log("droperr"+JSON.stringify(err))
+        }
+    });
+}

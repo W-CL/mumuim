@@ -81,7 +81,6 @@
                         codingType: 'utf8',
                         offset: 0
                     }, function(rets, errs) {
-                        console.log("write=======================")
                         if( rets.status ){
                             console.log("ret"+ JSON.stringify( rets ) );
                         }else{
@@ -128,14 +127,15 @@
                     size: 14,
                     height: 40,
                 },
-                searchEmptyView: {             //JSON对象；搜索结果为空时显示效果配置
-                    image: {              //JSON对象；图片配置
-                        path: 'widget://image/10.png',             //字符串类型；图片路径，要求本地路径（fs://、widget://）；不传则不显示
-                        w: 14,                //数字类型；图片宽；默认：100
-                        h: 36,                //数字类型；图片高；默认：80
-                        marginB: 10,           //数字类型；图片下边距离模块下边距离；默认：自适应上下居中显示
-                    },
-                },
+                // //背景图片
+                // searchEmptyView: {             //JSON对象；搜索结果为空时显示效果配置
+                //     image: {              //JSON对象；图片配置
+                //         path: 'widget://image/10.png',             //字符串类型；图片路径，要求本地路径（fs://、widget://）；不传则不显示
+                //         w: 14,                //数字类型；图片宽；默认：100
+                //         h: 36,                //数字类型；图片高；默认：80
+                //         marginB: 10,           //数字类型；图片下边距离模块下边距离；默认：自适应上下居中显示
+                //     },
+                // },
                 indicator: {
                     bgColor: '#fff',
                     color: '#696969'
@@ -149,17 +149,14 @@
         }, function(ret, err) {
             if (ret.eventType == 'selected') {
                 $api.setStorage('city', ret.cityInfo.city);
-                api.sendEvent({
-                    name: 'cityChange',
-                });
-                api.closeWin();
                 api.openWin({
-                    name: 'login',
-                    url: '../login.html',
+                    name: 'xiangxi',
+                    url: 'xiangxi_window.html',
                     pageParam: {
-                        name: 'test'
+                        uid:  ret.cityInfo.id
                     }
                 });
+                api.closeWin();
             }
         });
     };

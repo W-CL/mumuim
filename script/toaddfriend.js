@@ -1,37 +1,3 @@
-/**
- *初始化db
- * @param db
- */
-function openDb(db) {
-    db.openDatabase({
-        name: "mylocaldb"
-    }, function(ret, err){
-        if( ret.status ){
-           return true;
-        }else{
-          return false
-        }
-    });
-}
-
-/**
- * 删除表格
- * @param db
- * @param table
- */
-
-function deltable(db,table) {
-    db.executeSql({
-        name: "mylocaldb",
-        sql: 'drop table '+table
-    }, function(ret, err) {
-        if (ret.status) {
-            console.log("ret:"+JSON.stringify(ret))
-        } else {
-            console.log("droperr"+JSON.stringify(err))
-        }
-    });
-}
 
 /**
  * 创建一个表格
@@ -40,7 +6,7 @@ function deltable(db,table) {
 function newToAddFriend(db) {
       db.executeSql({
           name: "mylocaldb",
-          sql: 'CREATE TABLE IF NOT EXISTS ToAddFriend(nickname varchar(25), username varchar(25), uid INTEGER, intro varchar(255),photo varchar(255),online INTEGER,isfriend INTEGER)'
+          sql: 'CREATE TABLE IF NOT EXISTS ToAddFriend(nickname varchar(25), addtime INTEGER,username varchar(25), uid INTEGER, intro varchar(255),photo varchar(255),online INTEGER,isfriend INTEGER)'
       }, function(ret, err) {
           if (ret.status) {
               console.log("ret:"+JSON.stringify(ret))
@@ -61,7 +27,7 @@ function insertToAddFriend(db,data) {
     newToAddFriend(db)
     db.executeSql({
         name: 'mylocaldb',
-        sql: 'INSERT INTO toAddFriend  VALUES ( "'+data.nickname+'", "'+data.username+'", '+data.uid+', "'+data.intro+'", "'+data.photo+'", '+data.online+', '+data.isfriend+')'
+        sql: 'INSERT INTO toAddFriend  VALUES ( "'+data.nickname+'", '+data.addtime+', "'+data.username+'", '+data.uid+', "'+data.intro+'", "'+data.photo+'", '+data.online+', '+data.isfriend+')'
     }, function(ret, err){
         if( ret.status ){
             console.log('添加成功');
@@ -97,7 +63,7 @@ function findToAddFriendByUid(db,uid) {
 function findToAddFriendByNickName(db,nickname) {
     db.selectSql({
         name: 'mylocaldb',
-        sql: 'SELECT * FROM toAddFriend where nickname="'+nickname+'"'
+        sql: 'SELECT * FROM toAddFriend where nickname="'+nickname+'" order by addtime desc'
     }, function(ret, err){
         if( ret.status ){
             return ret.data
@@ -188,18 +154,3 @@ function getAllToAddFriend(db) {
     });
 }
 
-/**
- * 关闭数据库
- */
-
-function closedb() {
-    db.closeDatabase({
-        name: 'mylocaldb'
-    }, function(ret, err){
-        if( ret.status ){
-            alert('关闭成功');
-        }else{
-            alert( JSON.stringify( err ) );
-        }
-    });
-}
